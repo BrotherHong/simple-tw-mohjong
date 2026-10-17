@@ -38,9 +38,10 @@ def _result_lines(result: SimulationResult) -> list[str]:
 
 def render_frame(frame: ReplayFrame, result: SimulationResult, recent: tuple[str, ...], *, speed: float, paused: bool) -> str:
     state = frame.state
+    status = "FINISHED" if frame.index == len(result.actions) else ("PAUSED" if paused else "PLAYING")
     lines = [
         f"Taiwanese mahjong | step {frame.index}/{len(result.actions)} | {state.phase.value} | turn P{state.turn} | wall {len(state.wall.tiles)}",
-        f"{'PAUSED' if paused else 'PLAYING'} | {speed:g} actions/s | space pause | n/Enter step | +/- speed | q quit",
+        f"{status} | {speed:g} actions/s | space pause | n/Enter step | +/- speed | q quit",
     ]
     for player, own in enumerate(state.players):
         wind = (player - state.dealer) % 4 if getattr(state, "rules_version", 1) == 2 else player
@@ -189,4 +190,5 @@ def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, pla
                 deadline = time.monotonic() + 1 / speed
                 dirty = True
             else:
-                time.sleep(0.02)
+                delay = 0.02 if paused else min(0.02, max(0.0, deadline - time.monotonic()))
+                time.sleep(delay)
