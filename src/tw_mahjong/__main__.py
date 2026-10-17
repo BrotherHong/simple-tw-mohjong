@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import random
 import sys
 from pathlib import Path
@@ -13,6 +14,7 @@ from .engine import create_game
 from .model import MahjongError, SimulationResult
 from .records import record_from_json, record_to_json
 from .simulation import SimplePolicy, simulate
+from .playback import watch
 
 
 def _summary(result: SimulationResult) -> dict[str, object]:
@@ -35,7 +37,17 @@ def main(argv: Optional[list[str]] = None) -> int:
     run.add_argument("--output", type=Path)
     load = commands.add_parser("replay", help="Validate and replay a JSON record")
     load.add_argument("path", type=Path)
+    viewer = commands.add_parser("watch", help="Watch a verified record in the terminal")
+    viewer.add_argument("path", type=Path)
+    viewer.add_argument("--speed", type=float, default=2)
+    viewer.add_argument("--step", action="store_true")
+    viewer.add_argument("--plain", action="store_true")
     args = parser.parse_args(argv)
+    if args.command == "watch":
+        if not math.isfinite(args.speed) or not 0.25 <= args.speed <= 64:
+            parser.error("--speed must be finite and between 0.25 and 64")
+        if args.step and (args.plain or not sys.stdin.isatty() or not sys.stdout.isatty()):
+            parser.error("--step requires an interactive terminal without --plain")
     try:
         if args.command == "simulate":
             initial = create_game(dealer=args.dealer, rng=random.Random(args.seed))
@@ -47,12 +59,17 @@ def main(argv: Optional[list[str]] = None) -> int:
                     stream.write(text + "\n")
         else:
             result = record_from_json(args.path.read_text(encoding="utf-8"))
+        if args.command == "watch":
+            watch(result, speed=args.speed, step=args.step, plain=args.plain)
+            return 0
         print(json.dumps(_summary(result), ensure_ascii=False, sort_keys=True))
         return 0
     except (MahjongError, OSError, UnicodeError) as exc:
         code = exc.code if isinstance(exc, MahjongError) else "IO_ERROR"
         print(f"{code}: {exc}", file=sys.stderr)
         return 1
+    except KeyboardInterrupt:
+        return 130
 
 
 if __name__ == "__main__":

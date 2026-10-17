@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from random import Random
-from typing import Callable
+from typing import Callable, Iterator
 
 from .engine import apply_action, legal_actions, validate_state
-from .model import Action, ActionKind, GameState, MahjongError, Phase, SimulationResult
+from .model import Action, ActionKind, GameState, MahjongError, Phase, ReplayFrame, SimulationResult
 
 Policy = Callable[[GameState, int], Action]
 
@@ -57,10 +57,20 @@ def simulate(initial_state: GameState, policies: tuple[Policy, ...]) -> Simulati
 
 
 def replay(initial_state: GameState, actions: tuple[Action, ...]) -> GameState:
+    state = initial_state
+    for frame in iter_replay(initial_state, actions):
+        state = frame.state
+    return state
+
+
+def iter_replay(initial_state: GameState, actions: tuple[Action, ...]) -> Iterator[ReplayFrame]:
+    """Yield the initial snapshot followed by one frame per accepted action."""
     validate_state(initial_state)
     if not isinstance(actions, tuple):
         raise MahjongError("INVALID_ACTION", "Replay requires a tuple of actions")
     state = initial_state
-    for action in actions:
-        state = apply_action(state, action).state
-    return state
+    yield ReplayFrame(0, state, None, ())
+    for index, action in enumerate(actions, 1):
+        transition = apply_action(state, action)
+        state = transition.state
+        yield ReplayFrame(index, state, action, transition.events)

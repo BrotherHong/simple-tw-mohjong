@@ -206,3 +206,11 @@ class SimulationResult:
     initial_state: GameState
     final_state: GameState
     actions: tuple[Action, ...]
+
+
+@dataclass(frozen=True)
+class ReplayFrame:
+    index: int
+    state: GameState
+    action: Optional[Action]
+    events: tuple[Event, ...]
