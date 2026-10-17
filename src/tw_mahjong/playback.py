@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import os
+import shutil
 import sys
 import time
 from collections import deque
@@ -19,21 +20,27 @@ def _tiles(tiles: tuple[Tile, ...]) -> str:
     return " ".join(tile.code for tile in tiles) or "-"
 
 
-def _result_lines(result: SimulationResult) -> list[str]:
+def _result_lines(result: SimulationResult, *, chinese: bool = False) -> list[str]:
     state = result.final_state
     if state.phase is not Phase.ENDED:
-        return ["End of recorded prefix (game unfinished)."]
-    lines = [f"Result: {state.end_reason.value} | winner={state.winner} source={state.win_source}"]
+        return ["紀錄結束（牌局尚未結束）。" if chinese else "End of recorded prefix (game unfinished)."]
+    if chinese:
+        reasons = {"SELF_DRAW": "自摸", "DISCARD_WIN": "放槍胡", "ROB_KONG": "搶槓胡", "WALL_EXHAUSTED": "流局"}
+        lines = [f"結果: {reasons[state.end_reason.value]} | 贏家={state.winner} 來源={state.win_source}"]
+    else:
+        lines = [f"Result: {state.end_reason.value} | winner={state.winner} source={state.win_source}"]
     if getattr(state, "rules_version", 1) == 1:
-        return lines + ["Scoring: unavailable (v1 record)."]
+        return lines + ["計分資訊未包含（v1 紀錄）。" if chinese else "Scoring: unavailable (v1 record)."]
     from .scoring import settle_hand
 
     settlement = settle_hand(state, result.settlement_config)
-    lines.append(f"Hand tai: {settlement.score.tai}")
-    lines.extend(f"  {item.code}: +{item.tai}" for item in settlement.score.items)
+    from .board import SCORE_NAMES
+
+    lines.append(f"牌型台數: {settlement.score.tai}" if chinese else f"Hand tai: {settlement.score.tai}")
+    lines.extend(f"  {SCORE_NAMES[item.code] if chinese else item.code}: +{item.tai}" for item in settlement.score.items)
     for payment in settlement.payments:
-        lines.append(f"  P{payment.payer} -> P{payment.payee}: {payment.amount} points ({payment.tai} tai incl. dealer)")
-    lines.append(f"Score deltas: {settlement.deltas}")
+        lines.append(f"  P{payment.payer} -> P{payment.payee}: {payment.amount} 分（含莊家加台共 {payment.tai} 台）" if chinese else f"  P{payment.payer} -> P{payment.payee}: {payment.amount} points ({payment.tai} tai incl. dealer)")
+    lines.append(f"分數增減: {settlement.deltas}" if chinese else f"Score deltas: {settlement.deltas}")
     return lines
 
 
@@ -90,11 +97,20 @@ def _visible_frames(result: SimulationResult, detail: bool = False) -> tuple[_Pl
 
 def render_frame(frame: ReplayFrame, result: SimulationResult, recent: tuple[str, ...], *, speed: float, paused: bool,
                  visible_index: Optional[int] = None, visible_total: Optional[int] = None,
-                 draws: int = 0, discards: int = 0, detail: bool = False) -> str:
+                 draws: int = 0, discards: int = 0, detail: bool = False,
+                 plain: bool = True, ascii_tiles: bool = False, color: bool = False,
+                 columns: int = 100) -> str:
     state = frame.state
     status = "FINISHED" if frame.index == len(result.actions) else ("PAUSED" if paused else "PLAYING")
     index = frame.index if visible_index is None else visible_index
     total = len(result.actions) if visible_total is None else visible_total
+    if not plain:
+        from .board import render_board
+
+        return render_board(frame, result, recent, primary=main_action(frame, detail), speed=speed,
+                            paused=paused, visible_index=index, visible_total=total, draws=draws,
+                            discards=discards, columns=columns, ascii_tiles=ascii_tiles, color=color,
+                            result_lines=tuple(_result_lines(result, chinese=not ascii_tiles)) if frame.index == len(result.actions) else ())
     lines = [
         f"Taiwanese mahjong | display {index}/{total} | operation {frame.index}/{len(result.actions)} | draws {draws} discards {discards}",
         f"{state.phase.value} | turn P{state.turn} | wall {len(state.wall.tiles)} | {status} | {speed:g} steps/s",
@@ -195,7 +211,8 @@ class _Terminal(AbstractContextManager):
         return key
 
 
-def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, plain: bool = False, detail: bool = False) -> None:
+def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, plain: bool = False,
+          detail: bool = False, ascii_tiles: bool = False, no_color: bool = False) -> None:
     if isinstance(speed, bool) or not isinstance(speed, (int, float)) or not math.isfinite(speed) or not 0.25 <= speed <= 64:
         raise MahjongError("INVALID_PLAYBACK", "Speed must be finite and between 0.25 and 64")
     interactive = sys.stdin.isatty() and sys.stdout.isatty() and not plain
@@ -205,9 +222,17 @@ def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, pla
 
     def render(index: int, paused: bool) -> str:
         item = frames[index]
-        return render_frame(item.frame, result, item.recent, speed=speed, paused=paused,
-                            visible_index=index, visible_total=len(frames) - 1,
-                            draws=item.draws, discards=item.discards, detail=detail)
+        options = dict(speed=speed, paused=paused, visible_index=index, visible_total=len(frames) - 1,
+                       draws=item.draws, discards=item.discards, detail=detail, plain=not interactive,
+                       ascii_tiles=ascii_tiles, color=interactive and not no_color,
+                       columns=shutil.get_terminal_size((100, 40)).columns)
+        text = render_frame(item.frame, result, item.recent, **options)
+        try:
+            text.encode(sys.stdout.encoding or "utf-8")
+        except UnicodeEncodeError:
+            options["ascii_tiles"] = True
+            text = render_frame(item.frame, result, item.recent, **options)
+        return text
 
     if not interactive:
         for index in range(len(frames)):
@@ -219,7 +244,12 @@ def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, pla
     deadline = time.monotonic() + 1 / speed
     with _Terminal() as terminal:
         dirty = True
+        last_columns = shutil.get_terminal_size((100, 40)).columns
         while True:
+            columns = shutil.get_terminal_size((100, 40)).columns
+            if columns != last_columns:
+                last_columns = columns
+                dirty = True
             if dirty:
                 sys.stdout.write("\x1b[H\x1b[J" + render(index, paused))
                 sys.stdout.flush()
