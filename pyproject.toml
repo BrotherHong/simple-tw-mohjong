@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tw-mahjong"
+version = "0.1.0"
+description = "Deterministic Taiwanese mahjong subject program for test-generation research"
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+dependencies = []
+
+[project.scripts]
+tw-mahjong = "tw_mahjong.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
