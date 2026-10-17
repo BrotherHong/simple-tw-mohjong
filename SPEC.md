@@ -1,6 +1,8 @@
-# 台灣麻將功能規格 v1
+# 台灣麻將功能規格 v2
 
 本文件為受測程式的功能契約，使用 Python 3.10.x。這是明確裁定的**簡化台灣十六張麻將**，不主張涵蓋各地完整玩法。需求編號為穩定識別碼。
+
+> 第 1–8 節保留 v1 契約供舊紀錄相容。新牌局使用第 9–13 節的 v2 擴充；有衝突時 v2 條文優先。v1 紀錄仍嚴格採舊規則且不計分。
 
 ## 1. 範圍與共同契約
 
@@ -95,3 +97,61 @@ CLI 使用 `Random(seed)` 洗牌，座次 p 的策略使用 `Random(seed * 4 + p
 | RECORD、CLI | `records`、命令列入口 |
 
 開發不新增測試程式；交付前以程式審查、Python 3.10 編譯檢查與直接執行代表性情境核對上述要求。
+
+## 9. 第二階段資料與槓規則
+
+- **V2-001**：GameState 新增 `rules_version`（整數 1 或 2，預設 2）、`round_wind`（kind 27–30，預設 27）、`draw_source`（DrawSource 或 None）、`pending_kong`（PendingKong 或 None）、`robbed_tile`（Tile 或 None）、`last_discard_last`（bool，預設 False）。`create_game` 新增同名 rules_version、round_wind 參數；v1 僅允許預設東風。v2 的座次 0–3 為穩定玩家 id，門風為 `(player-dealer)%4 + 27`，不再固定 id 0 為東風。
+- **V2-002**：DrawSource 為 INITIAL、NORMAL、FLOWER、KONG。只在 last_drawn 存在時保留；初始化補花後為 FLOWER，未補花為 INITIAL；一般摸牌遇花為 FLOWER，槓後補牌即使遇花仍為 KONG。v1 不保存來源。`last_discard_last` 僅在 RESPONSE 或 DISCARD_WIN 結束時可為 True，表示該棄牌緊接著摸到最後一張一般牌（吃碰後出牌不算）。
+- **KONG-001**：MeldKind 增加 KONG_EXPOSED、KONG_CONCEALED、KONG_ADDED，皆含同種四張實體牌，結構仍算一組面子。暗槓 source、claimed_tile 必須 None；其餘維持外來來源，added 保留原碰牌 source、claimed_tile。
+- **KONG-002**：ActionKind 增加同名三種操作，tiles 分別為自己持有的三張、四張、一張 id。明槓可回應棄牌；暗槓與加槓限 DISCARD 且 last_drawn 非空。補牌可再槓。排序優先序為 HU、KONG_EXPOSED/PENG（同級時依 kind 字串）、CHI、KONG_CONCEALED、KONG_ADDED、DRAW、DISCARD、PASS，再以 tiles 排序；裁決同級仍以距離為準。
+- **KONG-003**：加槓建立 `PendingKong(player, tile, meld_index)`，進入 ROB_KONG，原碰與暗手皆不先變動，發出 KONG_DECLARED。其他三人各 HU/PASS 一次。可搶胡僅加槓，三人回應收齊才裁決；多胡取最近者。ROB_KONG 等效手牌數為發起者 17、其他人 16；last_drawn 與 draw_source 保留。
+- **KONG-004**：搶槓成功為 EndReason.ROB_KONG，原碰不變，被搶牌從來源暗手移至 robbed_tile 專屬持有區；winning_tile 指向它，不加入贏家暗手或河牌；四人等效手牌皆 16，清除 pending_kong、last_drawn、draw_source。robbed_tile 僅該結束原因存在。
+- **KONG-005**：明槓、暗槓或加槓成立後發出 KONG_COMPLETED，從後端補牌，花牌公開後繼續從後端補，取得一般牌後回 DISCARD。空牆則 WALL_EXHAUSTED，保留已成立的槓。槓成立／補花／補牌事件依實際順序回傳。無額外死牆、四槓流局或槓牌付款。
+- **KONG-006**：validate_state 同時驗證新增背景與所有權；搶槓牌加入 144 張守恆計算。v1 不允許新副露、新操作、新 phase 或背景。非法新操作沿用 INVALID_ACTION，非法背景為 INVALID_STATE。
+- **WAIT-001**：`find_waits(hand, melds=()) -> tuple[int, ...]` 接受 `16-3*m` 張暗手，其他輸入驗證與 analyze_hand 相同。枚舉自己暗手與副露尚未持滿四張的一般牌種，回傳可成胡 kind 升冪 tuple，不受輸入排列影響，不考慮他家持牌或河牌，不推估剩餘張數。
+- **SIM-004**：v2 SimplePolicy 依 HU、KONG_EXPOSED、KONG_CONCEALED、KONG_ADDED、PENG、CHI、DRAW 優先取第一項，其餘隨機出牌或 PASS。v1 策略順序維持原樣。
+
+## 10. 逐步重播與終端機
+
+- **PLAY-001**：`iter_replay(initial_state, actions)` 回傳 iterator，先驗證輸入狀態及 actions tuple，再依序 yield `ReplayFrame(index, state, action, events)`。index 0 為原初態，action=None、events=()；其後每個合法操作一個 frame。非法步驟於走到該步時拋原錯誤，不先修改輸入。replay 完整消耗此 iterator 回傳末態。
+- **PLAY-002**：`watch PATH [--speed 2] [--step] [--plain]` 先完整驗證紀錄，再從發牌完成的初態播放。speed 為每秒操作數，必須有限且 0.25–64；非法值為 CLI 參數錯誤。每幀顯示四家手牌、副露、花、河牌、階段、目前玩家、剩餘牌數、操作及最近事件。使用明確牌代碼（1m、E 等）避免終端機字寬差異。
+- **PLAY-003**：互動時空白暫停／繼續，n/Enter 單步並暫停，+/- 將速度加倍／減半（夾在範圍內），q 正常提早離開。--step 初始暫停；最後一幀顯示結果並返回，不另外等待按鍵。Ctrl+C exit 130。離開與例外均須還原輸入模式及游標顯示。
+- **PLAY-004**：stdin 或 stdout 非 TTY，或 --plain 時，逐幀列印無 ANSI、無延遲、無鍵盤等待的文字；--step 必須互動且不搭配 --plain，否則參數錯誤。呈現層可使用時間與 I/O，規則／模擬／重播函式不可等待。
+
+## 11. 固定計台
+
+- **SCORE-001**：`score_hand(state) -> ScoreResult(tai, items, decomposition, winning_group)` 僅接受 v2 ENDED 狀態；v1 或未結束為 INVALID_SCORE。流局回傳 0、空 items、None、None。ScoreItem 為 `(code, tai)`，按 code 排序；winning_group 為暗手拆解中胡牌所落的三張 kind tuple，落在將眼時為 None。
+- **SCORE-002**：對所有胡牌拆解及可能胡牌落點計台，取最高 tai，同分依 `(pair, groups, winning_group)` 字典序（None 在所有 group 前）選擇。放槍／搶槓完成的刻子不算暗刻，暗槓算暗刻。門清表示所有既有面子皆暗槓或無既有面子。不同實體副本不產生額外計台候選。
+
+| code | 條件與台數 |
+|---|---|
+| CONCEALED / SELF_DRAW / CONCEALED_SELF_DRAW | 門清 1／自摸 1／兩者同時 3，第三者取代前兩者 |
+| DRAGON_R / DRAGON_G / DRAGON_B | 對應三元刻或槓各 1；有大小三元時全部不另計 |
+| SEAT_WIND / ROUND_WIND | 對應風牌刻或槓各 1，可累計（包括大小四喜） |
+| SEAT_FLOWER | 相對莊家門風對應的 F1–F4、F5–F8，每張 1，合併成一個 item |
+| FLOWER_SET | 取得 F1–F4 或 F5–F8 全組，每組 1，可與門花累計，合併成一個 item |
+| ALL_TRIPLETS | 五面子均刻或槓，4；字一色不另計 |
+| MIXED_SUIT / PURE_SUIT / ALL_HONORS | 一種數牌加字 4／純一種數牌 8／全字 16，三者互斥 |
+| SMALL_DRAGONS / BIG_DRAGONS | 兩組三元刻槓加另一三元將眼 4／三組三元刻槓 8 |
+| SMALL_WINDS / BIG_WINDS | 三組風刻槓加另一風將眼 8／四組風刻槓 16 |
+| THREE_CONCEALED / FOUR_CONCEALED / FIVE_CONCEALED | 三／四／五暗刻槓為 2／5／8，僅取最高一項 |
+| SUPPLEMENT_WIN / ROB_KONG | 來源 FLOWER 或 KONG 的自摸 1／搶槓胡 1 |
+| LAST_DRAW / LAST_DISCARD | 牌牆已空時自摸 1／last_discard_last 為 True 的放槍胡 1；搶槓不計此兩項 |
+| SINGLE_WAIT | 胡牌前 find_waits 僅一個牌種，1；自摸移除 winning_tile 後計算，其他情形以贏家原暗手計算 |
+
+- **SCORE-003**：不計平胡、全／半求人、早巡胡聽、宣告聽牌與特殊花牌胡。無台數上限、無最低台門檻，表外項目不計。
+
+## 12. 單局結算
+
+- **PAY-001**：`SettlementConfig(base=100, tai_value=20)` 是 frozen dataclass，base 為非負整數，tai_value 為正整數，拒絕 bool；非法為 INVALID_SETTLEMENT。`settle_hand(state, config=SettlementConfig()) -> Settlement(score, payments, deltas)` 內部重算 score，不接受外部未驗證台數。
+- **PAY-002**：Payment 為 `(payer, payee, tai, amount)`，按 payer 排序。每筆 tai 為牌型 tai 加莊家一台（winner 或 payer 為 dealer 時）；amount=`base+tai_value*tai`。自摸三家分付，放槍／搶槓只有來源者付，流局無 payments。deltas 為四個整數 tuple，加總 0。無連莊、包牌、槓牌額外付款。
+
+## 13. JSON v2 與相容
+
+- **RECORD-002**：rules_version=1 的結果仍以原 JSON v1 精確欄位寫出、讀回強制使用舊規則，無計分資訊。新建牌局預設 v2；版本不可在一份紀錄途中改變。舊紀錄不得補猜背景或計分。
+- **RECORD-003**：JSON v2 根欄位精確為 version（整數 2）、initial_state、actions、final_state、settlement_config、settlement。前後狀態皆 rules_version=2；State 除原 v1 欄位外新增第 V2-001 條六欄。DrawSource 以大寫字串表示，pending_kong 為 `{player,tile,meld_index}`（tile 為 id），robbed_tile 為 id 或 null。Meld 暗槓 source/claimed_tile 為 null。
+- **RECORD-004**：settlement_config 為 `{base,tai_value}`。若末態未結束，settlement 必須 null；已結束時為 `{score,payments,deltas}`。score 為 `{tai,items,decomposition,winning_group}`；items 為 `{code,tai}` array；decomposition 為 `{pair,groups}` 或 null；winning_group 為三個 kind array 或 null。payments 為 `{payer,payee,tai,amount}` array，deltas 為四個 integer。讀入須重播與重算，嚴格比較包含型別的標準 JSON 資料，拒絕 boolean 冒充 integer 或任何不一致結果。
+- **RECORD-005**：SimulationResult 新增 settlement_config（預設 SettlementConfig），不儲存冗餘計分物件；record_to_json 寫出時重算。simulate 新增 keyword-only settlement_config 參數。record_from_json 保留該設定。額外錯誤皆統一 INVALID_RECORD。v1 結果的設定須為預設值且不寫出。
+- **CLI-002**：simulate 新增 --base、--tai-value、--round-wind（E/S/W/N），預設 100、20、E，建立 v2 牌局。原 simulate/replay 摘要欄位保持不變；watch 最終畫面額外顯示計台及付款明細，v1 顯示「計分資訊未包含」。
+
+開發不新增測試程式；在 Python 3.10 直接執行牌型、槓與搶槓、補花耗盡、計台互斥、分數守恆與新舊重播情境核對。
