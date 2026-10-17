@@ -15,6 +15,7 @@ from .model import MahjongError, SettlementConfig, SimulationResult, tile_kind
 from .records import record_from_json, record_to_json
 from .simulation import SimplePolicy, simulate
 from .playback import watch
+from .policies import BasicEfficiencyPolicy
 
 
 def _summary(result: SimulationResult) -> dict[str, object]:
@@ -31,13 +32,14 @@ def _summary(result: SimulationResult) -> dict[str, object]:
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Simplified Taiwanese 16-tile mahjong")
     commands = parser.add_subparsers(dest="command", required=True)
-    run = commands.add_parser("simulate", help="Run four simple policies")
+    run = commands.add_parser("simulate", help="Run four computer policies")
     run.add_argument("--seed", type=int, required=True)
     run.add_argument("--dealer", type=int, choices=range(4), default=0)
     run.add_argument("--output", type=Path)
     run.add_argument("--base", type=int, default=100, help="Nonnegative base points")
     run.add_argument("--tai-value", type=int, default=20, help="Positive points per tai")
     run.add_argument("--round-wind", choices=("E", "S", "W", "N"), default="E")
+    run.add_argument("--policy", choices=("basic", "simple"), default="basic")
     load = commands.add_parser("replay", help="Validate and replay a JSON record")
     load.add_argument("path", type=Path)
     viewer = commands.add_parser("watch", help="Watch a verified record in the terminal")
@@ -58,7 +60,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         if args.command == "simulate":
             config = SettlementConfig(args.base, args.tai_value)
             initial = create_game(dealer=args.dealer, rng=random.Random(args.seed), round_wind=tile_kind(args.round_wind))
-            policies = tuple(SimplePolicy(random.Random(args.seed * 4 + player + 1)) for player in range(4))
+            policy = BasicEfficiencyPolicy if args.policy == "basic" else SimplePolicy
+            policies = tuple(policy(random.Random(args.seed * 4 + player + 1)) for player in range(4))
             result = simulate(initial, policies, settlement_config=config)
             if args.output is not None:
                 text = record_to_json(result)

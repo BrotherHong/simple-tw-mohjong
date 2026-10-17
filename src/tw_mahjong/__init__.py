@@ -12,6 +12,7 @@ from .engine import apply_action, create_game, legal_actions, validate_state
 from .simulation import Policy, SimplePolicy, iter_replay, replay, simulate
 from .records import record_from_json, record_to_json
 from .scoring import score_hand, settle_hand
+from .policies import BasicEfficiencyPolicy, evaluate_structure
 
 __all__ = [
     "Action", "ActionKind", "Decomposition", "EndReason", "Event", "EventKind",
@@ -23,4 +24,5 @@ __all__ = [
     "ReplayFrame", "iter_replay",
     "DrawSource", "PendingKong", "ScoreItem", "ScoreResult", "Payment", "Settlement", "SettlementConfig",
     "find_waits", "score_hand", "settle_hand",
+    "BasicEfficiencyPolicy", "evaluate_structure",
 ]
