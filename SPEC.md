@@ -10,6 +10,7 @@
 - **API-001**：公開資料使用 frozen dataclass、tuple 及 Enum。核心函式不改變輸入，不使用系統時間或全域亂數；不向終端輸出。`random.Random` 僅能由呼叫端提供，使用時會推進該物件的亂數狀態。
 - **API-002**：公開函式對非法輸入拋出 `MahjongError`（`ValueError` 子類），具有穩定字串 `code`。錯誤訊息可補充細節，非契約比較對象。布林值不視為整數。
 - **API-003**：核心錯誤碼為 `INVALID_TILE`、`INVALID_HAND`、`INVALID_MELD`、`INVALID_WALL`、`INVALID_PLAYER`、`INVALID_STATE`、`INVALID_ACTION`、`INVALID_POLICY`、`INVALID_RECORD`。由外層傳入的錯誤資料先依該介面的型別與結構檢查；同時違反多項規則時不保證錯誤優先順序。
+- **API-004**：專案 metadata 要求 `>=3.10,<3.11`，`.python-version` 為 `3.10`。執行期不依賴第三方套件。核心 API 皆從 `tw_mahjong` 匯出。
 
 ## 2. 牌與副露模型
 
@@ -61,8 +62,26 @@
 - **SIM-002**：`SimplePolicy(rng)` 需注入 `random.Random`。能 HU 則 HU、能 PENG 則選第一個、能 CHI 則選第一個，否則 DRAW、隨機 DISCARD、PASS。每次隨機出牌只對合法 DISCARD 清單呼叫一次 choice。策略可看完整狀態，非網路遊戲的資訊隔離 API。
 - **SIM-003**：模擬自然終止：每次一般摸牌消耗牌牆，吃碰消耗河牌與可副露暗手，回應每人每輪僅一次；不設任意步數截斷或時間依賴。
 - **REPLAY-001**：`replay(initial_state, actions)` 依序呼叫 apply_action，回傳最終 GameState；非法步驟照原錯誤碼拒絕。允許空紀錄與合法前綴，不要求一定結束。
+- **REPLAY-002**：actions 須為 Action tuple，其他容器為 `INVALID_ACTION`。policies 須為四個 callable 的 tuple；容器、數量或成員不符為 `INVALID_POLICY`。`SimplePolicy` 的 rng 型別不符同樣為 `INVALID_POLICY`。
 - **RECORD-001**：`record_to_json(result)` / `record_from_json(text)` 提供 UTF-8 相容 JSON 字串往返。根物件為 `version: 1`、`initial_state`、`actions`、`final_state`；狀態序列化完整公開欄位，牌以 id、Enum 以其字串值表示，tuple 以 JSON array 表示。欄位必須精確符合格式，不接受缺漏、多餘欄位、重複 JSON key、非整數牌 id 或座次。讀取時驗證初末狀態並重播操作，末態必須一致，否則 `INVALID_RECORD`。檔案不含 seed、執行時間或策略，亦不依賴本機路徑。
 - **CLI-001**：`python -m tw_mahjong simulate --seed N [--dealer 0..3] [--output PATH]` 使用獨立亂數來源洗牌與建立四個策略，列印 JSON 結果摘要；指定 output 時存重播 JSON（既有檔案拒絕覆寫）。`python -m tw_mahjong replay PATH` 讀取驗證並輸出摘要。可預期使用錯誤以非零 exit code 回報至 stderr。
+
+### JSON v1 欄位格式
+
+JSON object 僅接受下列欄位；所有欄位皆必填，選用資訊以 null 表示。物件 key 順序及空白不影響意義，array 順序有意義。寫出使用雙空白縮排與 key 排序，函式回傳字串不加尾端換行。
+
+| 物件 | 欄位與型別 |
+|---|---|
+| 根物件 | `version`: integer 1；`initial_state`、`final_state`: State；`actions`: Action array |
+| State | `wall`: TileId array；`players`: 四個 Player；`discards`: 四個 TileId array；`dealer`、`turn`: Seat；`phase`: Phase 字串；`pending`: Pending 或 null；`responses`: Action array；`last_drawn`、`winning_tile`: TileId 或 null；`winner`、`win_source`: Seat 或 null；`end_reason`: EndReason 字串或 null |
+| Player | `hand`: TileId array；`melds`: Meld array；`flowers`: TileId array |
+| Meld | `kind`: `CHI` 或 `PENG`；`tiles`: 三個 TileId；`source`: Seat；`claimed_tile`: TileId |
+| Pending | `player`: Seat；`tile`: TileId |
+| Action | `kind`: ActionKind 字串；`player`: Seat；`tiles`: TileId array |
+
+TileId 為 0–143 的 integer；Seat 為 0–3 的 integer，不接受 boolean 或浮點數。Phase、EndReason、ActionKind 字串使用本文定義的大寫名稱。格式合法仍須通過狀態驗證及重播核對；空操作與合法未結束前綴均可序列化。
+
+CLI 使用 `Random(seed)` 洗牌，座次 p 的策略使用 `Random(seed * 4 + p + 1)`。摘要欄位固定為 `phase`、`end_reason`、`winner`、`win_source`、`winning_tile`、`actions`（操作數）、`remaining_tiles`。成功 exit code 0；資料或檔案錯誤為 1（檔案錯誤碼 `IO_ERROR`），參數格式錯誤由 argparse 回報 exit code 2。
 
 ## 8. 實作對照
 
