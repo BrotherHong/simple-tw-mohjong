@@ -156,3 +156,23 @@ CLI 使用 `Random(seed)` 洗牌，座次 p 的策略使用 `Random(seed * 4 + p
 - **CLI-002**：simulate 新增 --base、--tai-value、--round-wind（E/S/W/N），預設 100、20、E，建立 v2 牌局。原 simulate/replay 摘要欄位保持不變；watch 最終畫面額外顯示計台及付款明細，v1 顯示「計分資訊未包含」。
 
 開發不新增測試程式；在 Python 3.10 直接執行牌型、槓與搶槓、補花耗盡、計台互斥、分數守恆與新舊重播情境核對。
+
+## 14. 可見步驟與牌塊盤面（0.3）
+
+- **VIEW-001**：watch 預設跳過純 PASS 操作。若 PASS 的 events 含 CLAIMED、KONG_COMPLETED、DRAWN、FLOWER、WON 或 EXHAUSTED，仍顯示裁決結果。原始 index 0 與紀錄最後一個 index 一律保留，包括空紀錄、未結束前綴與最後一筆純 PASS。iter_replay、replay、核心狀態與 JSON 格式不變。
+- **VIEW-002**：新增 --detail 顯示全部原始操作及 RESPONSE 事件；預設近期事件不顯示 PASS 或 RESPONSE，主要操作以 WON、KONG_COMPLETED、CLAIMED 的 action 優先，其次為非 PASS 的原操作。加槓宣告與成立分別顯示。純 TURN 不作為 PASS 的獨立可見步驟。
+- **VIEW-003**：speed 改為每秒可見步驟，n/Enter 前進至下一個可見步驟。初態顯示進度 0/N，其餘為 1..N；N 不含初態。頂部另顯示原始 index 與累積 DRAW、DISCARD 數量，名稱為操作／摸牌／出牌，不稱為回合。--detail 與 --plain 可組合；--plain 仍預設過濾純 PASS。
+- **BOARD-001**：互動畫面預設中文牌塊。數牌為 [一萬]..[九萬]、[一筒]..[九筒]、[一索]..[九索]；字牌中文名稱加空白對齊；F1..F8 為春夏秋冬梅蘭竹菊。牌塊使用 ASCII 方括號，每塊顯示寬度固定 6 欄。ANSI 裝飾不算寬度，中文 W/F 字元算兩欄，其餘字元算一欄。
+- **BOARD-002**：萬紅、筒藍、索綠、字黃、花紫；--no-color 關閉所有樣式色彩，但互動畫面仍使用游標控制。--ascii 使用英文字與牌代碼，所有牌塊同樣補齊為 6 欄。若 stdout 編碼不能表示中文介面字元，自動採 ASCII；不推測字型支援。
+- **BOARD-003**：四家區塊按 id 0..3 排列，寬度 >=120 欄時兩欄兩列，否則直列。每區包含門風、莊家、目前玩家、手牌、副露（逐組括起並標示吃碰槓）、花牌、河牌最近 12 張及總數／省略數；牌塊換行不切斷。即時讀取終端機欄寬以適應縮放。極窄視窗至少以單張牌塊寬度排版，不犧牲牌名。
+- **BOARD-004**：剛摸入與剛打出的牌以 * 及明確動作文字標示，不依賴色彩。最近可見動作若為副露／槓／胡，顯示實際成立的玩家與動作，不以最後提交 PASS 的玩家作主角。標記只在該步顯示；初態可標示 last_drawn，獲吃碰的牌即使已離河仍在動作列顯示。
+- **BOARD-005**：--plain 及非 TTY 只輸出英文／牌代碼、無 ANSI 的直列文字，保留完整河牌與結果明細，不受 --ascii 或 --no-color 影響。互動畫面使用標準函式庫，保留現有 Windows / POSIX 輸入處理。Windows 為實際驗證平台，其他平台不能宣稱已實機驗證。
+
+## 15. 基本牌效率策略（0.3）
+
+- **AI-001**：`evaluate_structure(hand, melds=()) -> int` 驗證等效 16 張的手牌（驗證規則及錯誤碼同 find_waits）。暗手最佳不重複分組總分加 `12*len(melds)`，若無公開副露（只有暗槓或無副露）再加 2。分組分數：順子／刻子 12、對子 4、同花色相鄰兩張 3、同花色隔一張 2、孤張 0。字牌不能組成順子或兩張連張，不可跨花色。以記憶化搜尋最大化，不受實體副本或輸入排列影響。
+- **AI-002**：`BasicEfficiencyPolicy(rng)` 與 SimplePolicy 同介面；rng 必須 random.Random，否則 INVALID_POLICY。僅以自己暗手、副露、當前棄牌及合法操作決策，不使用他家暗手或牌牆順序。可呼叫完整狀態驗證，但不得以隱藏資訊評分。
+- **AI-003**：HU 優先；槓沿用目前順序 KONG_EXPOSED、KONG_CONCEALED、KONG_ADDED，各取第一合法項；其次處理吃碰、DRAW、DISCARD 或 PASS。一般出牌對每個合法 DISCARD 評估移除後的等效 16 張分數，對最高分的固定排序合法清單呼叫一次 rng.choice（即使只有一項），不額外使用亂數。
+- **AI-004**：吃碰以自己當前等效 16 張分數作為 PASS 基準，對每個合法 CHI/PENG 建立自己的假設副露，枚舉之後每張可棄牌，求最高結構分數。僅候選最高分嚴格大於基準時選吃碰；候選同分時 PENG 優先於 CHI，再依 tiles 字典序。評估不改變狀態，不消耗亂數；真正出牌時重新評估並遵守 AI-003。未改善或只有 PASS 時回應 PASS。此分數不是向聽數、勝率或防守風險。
+- **AI-005**：CLI simulate 增加 --policy basic|simple，預設 basic。BasicEfficiencyPolicy、evaluate_structure 從 tw_mahjong 匯出。SimplePolicy、simulate 的既有介面及亂數行為不變；--policy simple 使用原 CLI 的四份 seed 公式，重現原策略紀錄。新預設可能改變相同 seed 的牌局。
+- **COMPAT-001**：本階段只升套件版本至 0.3.0，不升規則或紀錄版本。策略不寫入 JSON，重播不重新決策。v1、v2 紀錄維持原有驗證、末態與計分語意。
