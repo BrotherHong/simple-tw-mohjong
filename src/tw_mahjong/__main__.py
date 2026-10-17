@@ -45,6 +45,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     viewer.add_argument("--speed", type=float, default=2)
     viewer.add_argument("--step", action="store_true")
     viewer.add_argument("--plain", action="store_true")
+    viewer.add_argument("--detail", action="store_true", help="Show all original actions including PASS")
     args = parser.parse_args(argv)
     if args.command == "watch":
         if not math.isfinite(args.speed) or not 0.25 <= args.speed <= 64:
@@ -64,7 +65,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         else:
             result = record_from_json(args.path.read_text(encoding="utf-8"))
         if args.command == "watch":
-            watch(result, speed=args.speed, step=args.step, plain=args.plain)
+            watch(result, speed=args.speed, step=args.step, plain=args.plain, detail=args.detail)
             return 0
         print(json.dumps(_summary(result), ensure_ascii=False, sort_keys=True))
         return 0

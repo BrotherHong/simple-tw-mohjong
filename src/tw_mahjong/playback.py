@@ -8,9 +8,10 @@ import sys
 import time
 from collections import deque
 from contextlib import AbstractContextManager
+from dataclasses import dataclass
 from typing import Optional
 
-from .model import MahjongError, Phase, ReplayFrame, SimulationResult, Tile
+from .model import Action, ActionKind, EventKind, MahjongError, Phase, ReplayFrame, SimulationResult, Tile
 from .simulation import iter_replay
 
 
@@ -36,13 +37,72 @@ def _result_lines(result: SimulationResult) -> list[str]:
     return lines
 
 
-def render_frame(frame: ReplayFrame, result: SimulationResult, recent: tuple[str, ...], *, speed: float, paused: bool) -> str:
+def main_action(frame: ReplayFrame, detail: bool = False) -> Optional[Action]:
+    if not detail:
+        for kind in (EventKind.WON, EventKind.KONG_COMPLETED, EventKind.CLAIMED):
+            for event in frame.events:
+                if event.kind is kind and event.action is not None:
+                    return event.action
+    if frame.action is not None and (detail or frame.action.kind is not ActionKind.PASS):
+        return frame.action
+    return None
+
+
+@dataclass(frozen=True)
+class _PlaybackFrame:
+    frame: ReplayFrame
+    recent: tuple[str, ...]
+    draws: int
+    discards: int
+
+
+def _visible_frames(result: SimulationResult, detail: bool = False) -> tuple[_PlaybackFrame, ...]:
+    """Filter presentation only; every original action is still replayed."""
+    meaningful = {EventKind.CLAIMED, EventKind.KONG_COMPLETED, EventKind.DRAWN,
+                  EventKind.FLOWER, EventKind.WON, EventKind.EXHAUSTED}
+    recent: deque[str] = deque(maxlen=5)
+    draws = discards = 0
+    visible = []
+    for frame in iter_replay(result.initial_state, result.actions):
+        action = frame.action
+        if action is not None:
+            draws += int(action.kind is ActionKind.DRAW)
+            discards += int(action.kind is ActionKind.DISCARD)
+        primary = main_action(frame, detail)
+        if primary is not None:
+            ids = " ".join(Tile(i).code for i in primary.tiles)
+            recent.append(f"P{primary.player} {primary.kind.value}{' ' + ids if ids else ''}")
+        for event in frame.events:
+            if not detail and event.kind is EventKind.RESPONSE:
+                continue
+            tile = "" if event.tile is None else f" {Tile(event.tile).code}"
+            actor = "" if event.player is None else f" P{event.player}"
+            recent.append(f"{event.kind.value}{actor}{tile}")
+        show = (
+            detail or frame.index in (0, len(result.actions))
+            or action is not None and action.kind is not ActionKind.PASS
+            or any(event.kind in meaningful for event in frame.events)
+        )
+        if show:
+            visible.append(_PlaybackFrame(frame, tuple(recent), draws, discards))
+    return tuple(visible)
+
+
+def render_frame(frame: ReplayFrame, result: SimulationResult, recent: tuple[str, ...], *, speed: float, paused: bool,
+                 visible_index: Optional[int] = None, visible_total: Optional[int] = None,
+                 draws: int = 0, discards: int = 0, detail: bool = False) -> str:
     state = frame.state
     status = "FINISHED" if frame.index == len(result.actions) else ("PAUSED" if paused else "PLAYING")
+    index = frame.index if visible_index is None else visible_index
+    total = len(result.actions) if visible_total is None else visible_total
     lines = [
-        f"Taiwanese mahjong | step {frame.index}/{len(result.actions)} | {state.phase.value} | turn P{state.turn} | wall {len(state.wall.tiles)}",
-        f"{status} | {speed:g} actions/s | space pause | n/Enter step | +/- speed | q quit",
+        f"Taiwanese mahjong | display {index}/{total} | operation {frame.index}/{len(result.actions)} | draws {draws} discards {discards}",
+        f"{state.phase.value} | turn P{state.turn} | wall {len(state.wall.tiles)} | {status} | {speed:g} steps/s",
+        "space pause | n/Enter step | +/- speed | q quit",
     ]
+    primary = main_action(frame, detail)
+    if primary is not None:
+        lines.append(f"Action: P{primary.player} {primary.kind.value} {primary.tiles}")
     for player, own in enumerate(state.players):
         wind = (player - state.dealer) % 4 if getattr(state, "rules_version", 1) == 2 else player
         lines.append(f"P{player} {'ESWN'[wind]}{' [dealer]' if player == state.dealer else ''} | hand: {_tiles(own.hand)}")
@@ -135,39 +195,36 @@ class _Terminal(AbstractContextManager):
         return key
 
 
-def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, plain: bool = False) -> None:
+def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, plain: bool = False, detail: bool = False) -> None:
     if isinstance(speed, bool) or not isinstance(speed, (int, float)) or not math.isfinite(speed) or not 0.25 <= speed <= 64:
         raise MahjongError("INVALID_PLAYBACK", "Speed must be finite and between 0.25 and 64")
     interactive = sys.stdin.isatty() and sys.stdout.isatty() and not plain
     if step and not interactive:
         raise MahjongError("INVALID_PLAYBACK", "--step requires an interactive terminal without --plain")
-    frames = iter_replay(result.initial_state, result.actions)
-    recent: deque[str] = deque(maxlen=5)
+    frames = _visible_frames(result, detail)
 
-    def remember(frame: ReplayFrame) -> None:
-        if frame.action is not None:
-            recent.append(f"#{frame.index} P{frame.action.player} {frame.action.kind.value} {frame.action.tiles}")
-        for event in frame.events:
-            tile = "" if event.tile is None else f" {Tile(event.tile).code}"
-            recent.append(f"{event.kind.value} P{event.player}{tile}")
+    def render(index: int, paused: bool) -> str:
+        item = frames[index]
+        return render_frame(item.frame, result, item.recent, speed=speed, paused=paused,
+                            visible_index=index, visible_total=len(frames) - 1,
+                            draws=item.draws, discards=item.discards, detail=detail)
 
     if not interactive:
-        for frame in frames:
-            remember(frame)
-            print(render_frame(frame, result, tuple(recent), speed=speed, paused=False))
+        for index in range(len(frames)):
+            print(render(index, False))
             print()
         return
-    frame = next(frames)
+    index = 0
     paused = step
     deadline = time.monotonic() + 1 / speed
     with _Terminal() as terminal:
         dirty = True
         while True:
             if dirty:
-                sys.stdout.write("\x1b[H\x1b[J" + render_frame(frame, result, tuple(recent), speed=speed, paused=paused))
+                sys.stdout.write("\x1b[H\x1b[J" + render(index, paused))
                 sys.stdout.flush()
                 dirty = False
-            if frame.index == len(result.actions):
+            if index == len(frames) - 1:
                 break
             key = terminal.key()
             advance = False
@@ -185,8 +242,7 @@ def watch(result: SimulationResult, *, speed: float = 2, step: bool = False, pla
                 deadline = time.monotonic() + 1 / speed
                 dirty = True
             if advance or (not paused and time.monotonic() >= deadline):
-                frame = next(frames)
-                remember(frame)
+                index += 1
                 deadline = time.monotonic() + 1 / speed
                 dirty = True
             else:
