@@ -3,15 +3,17 @@
 from __future__ import annotations
 
 import json
+from dataclasses import asdict
 from typing import Any
 
 from .engine import validate_state
 from .model import (
-    Action, ActionKind, EndReason, GameState, MahjongError, Meld, MeldKind,
-    PendingDiscard, Phase, PlayerState, SimulationResult, Tile, is_int,
+    Action, ActionKind, DrawSource, EndReason, GameState, MahjongError, Meld, MeldKind,
+    PendingDiscard, PendingKong, Phase, PlayerState, SettlementConfig, SimulationResult, Tile, is_int,
 )
 from .simulation import replay
 from .wall import Wall
+from .scoring import settle_hand
 
 
 def _encode_action(action: Action) -> dict[str, Any]:
@@ -19,7 +21,7 @@ def _encode_action(action: Action) -> dict[str, Any]:
 
 
 def _encode_state(state: GameState) -> dict[str, Any]:
-    return {
+    value = {
         "wall": [tile.id for tile in state.wall.tiles],
         "players": [{
             "hand": [tile.id for tile in own.hand],
@@ -39,6 +41,18 @@ def _encode_state(state: GameState) -> dict[str, Any]:
         "win_source": state.win_source, "winning_tile": state.winning_tile,
         "end_reason": None if state.end_reason is None else state.end_reason.value,
     }
+    if state.rules_version == 2:
+        value.update({
+            "rules_version": 2, "round_wind": state.round_wind,
+            "draw_source": None if state.draw_source is None else state.draw_source.value,
+            "pending_kong": None if state.pending_kong is None else {
+                "player": state.pending_kong.player, "tile": state.pending_kong.tile.id,
+                "meld_index": state.pending_kong.meld_index,
+            },
+            "robbed_tile": None if state.robbed_tile is None else state.robbed_tile.id,
+            "last_discard_last": state.last_discard_last,
+        })
+    return value
 
 
 def _check_result(result: SimulationResult) -> None:
@@ -46,6 +60,11 @@ def _check_result(result: SimulationResult) -> None:
         raise MahjongError("INVALID_RECORD", "Expected SimulationResult")
     validate_state(result.initial_state)
     validate_state(result.final_state)
+    if not isinstance(result.settlement_config, SettlementConfig):
+        raise MahjongError("INVALID_RECORD", "Expected SettlementConfig")
+    result.settlement_config.__post_init__()
+    if result.initial_state.rules_version == 1 and result.settlement_config != SettlementConfig():
+        raise MahjongError("INVALID_RECORD", "v1 cannot contain settlement settings")
     if replay(result.initial_state, result.actions) != result.final_state:
         raise MahjongError("INVALID_RECORD", "Recorded final state differs from replay")
 
@@ -53,12 +72,16 @@ def _check_result(result: SimulationResult) -> None:
 def record_to_json(result: SimulationResult) -> str:
     try:
         _check_result(result)
-        return json.dumps({
-            "version": 1,
+        value = {
+            "version": result.initial_state.rules_version,
             "initial_state": _encode_state(result.initial_state),
             "actions": [_encode_action(action) for action in result.actions],
             "final_state": _encode_state(result.final_state),
-        }, ensure_ascii=False, sort_keys=True, indent=2)
+        }
+        if result.initial_state.rules_version == 2:
+            value["settlement_config"] = asdict(result.settlement_config)
+            value["settlement"] = _settlement_data(result)
+        return json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2)
     except MahjongError as exc:
         raise MahjongError("INVALID_RECORD", str(exc)) from exc
 
@@ -95,8 +118,26 @@ def _decode_player(value: Any) -> PlayerState:
     )
 
 
-def _decode_state(value: Any) -> GameState:
-    value = _keys(value, "wall players discards dealer turn phase pending responses last_drawn winner win_source winning_tile end_reason")
+def _decode_state(value: Any, version: int) -> GameState:
+    fields = "wall players discards dealer turn phase pending responses last_drawn winner win_source winning_tile end_reason"
+    if version == 2:
+        fields += " rules_version round_wind draw_source pending_kong robbed_tile last_discard_last"
+    value = _keys(value, fields)
+    extra = {"rules_version": version}
+    if version == 2:
+        if not is_int(value["rules_version"]) or value["rules_version"] != 2:
+            raise MahjongError("INVALID_RECORD", "State rules version differs from record")
+        kong = value["pending_kong"]
+        if kong is not None:
+            kong = _keys(kong, "player tile meld_index")
+            kong = PendingKong(kong["player"], Tile(kong["tile"]), kong["meld_index"])
+        extra.update({
+            "round_wind": value["round_wind"],
+            "draw_source": None if value["draw_source"] is None else DrawSource(value["draw_source"]),
+            "pending_kong": kong,
+            "robbed_tile": None if value["robbed_tile"] is None else Tile(value["robbed_tile"]),
+            "last_discard_last": value["last_discard_last"],
+        })
     pending = value["pending"]
     if pending is not None:
         pending = _keys(pending, "player tile")
@@ -109,7 +150,14 @@ def _decode_state(value: Any) -> GameState:
         pending=pending, responses=tuple(_decode_action(action) for action in _array(value["responses"])),
         last_drawn=value["last_drawn"], winner=value["winner"], win_source=value["win_source"],
         winning_tile=value["winning_tile"], end_reason=None if value["end_reason"] is None else EndReason(value["end_reason"]),
+        **extra,
     )
+
+
+def _settlement_data(result: SimulationResult) -> Any:
+    if result.final_state.phase is not Phase.ENDED:
+        return None
+    return asdict(settle_hand(result.final_state, result.settlement_config))
 
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -129,15 +177,29 @@ def record_from_json(text: str) -> SimulationResult:
     if not isinstance(text, str):
         raise MahjongError("INVALID_RECORD", "Expected JSON text")
     try:
-        value = _keys(json.loads(text, object_pairs_hook=_unique_object, parse_constant=_reject_constant),
-                      "version initial_state actions final_state")
-        if not is_int(value["version"]) or value["version"] != 1:
+        value = json.loads(text, object_pairs_hook=_unique_object, parse_constant=_reject_constant)
+        if type(value) is not dict or not is_int(value.get("version")) or value["version"] not in (1, 2):
             raise MahjongError("INVALID_RECORD", "Unsupported record version")
+        version = value["version"]
+        fields = "version initial_state actions final_state"
+        config = SettlementConfig()
+        if version == 2:
+            fields += " settlement_config settlement"
+        value = _keys(value, fields)
+        if version == 2:
+            settings = _keys(value["settlement_config"], "base tai_value")
+            config = SettlementConfig(settings["base"], settings["tai_value"])
         result = SimulationResult(
-            _decode_state(value["initial_state"]), _decode_state(value["final_state"]),
+            _decode_state(value["initial_state"], version), _decode_state(value["final_state"], version),
             tuple(_decode_action(action) for action in _array(value["actions"])),
+            config,
         )
         _check_result(result)
+        if version == 2:
+            expected = json.dumps(_settlement_data(result), sort_keys=True, separators=(",", ":"))
+            recorded = json.dumps(value["settlement"], sort_keys=True, separators=(",", ":"))
+            if expected != recorded:
+                raise MahjongError("INVALID_RECORD", "Settlement differs from recomputed result")
         return result
     except (ValueError, TypeError, RecursionError) as exc:
         raise MahjongError("INVALID_RECORD", str(exc)) from exc

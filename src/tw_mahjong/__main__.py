@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Optional
 
 from .engine import create_game
-from .model import MahjongError, SimulationResult
+from .model import MahjongError, SettlementConfig, SimulationResult, tile_kind
 from .records import record_from_json, record_to_json
 from .simulation import SimplePolicy, simulate
 from .playback import watch
@@ -35,6 +35,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     run.add_argument("--seed", type=int, required=True)
     run.add_argument("--dealer", type=int, choices=range(4), default=0)
     run.add_argument("--output", type=Path)
+    run.add_argument("--base", type=int, default=100, help="Nonnegative base points")
+    run.add_argument("--tai-value", type=int, default=20, help="Positive points per tai")
+    run.add_argument("--round-wind", choices=("E", "S", "W", "N"), default="E")
     load = commands.add_parser("replay", help="Validate and replay a JSON record")
     load.add_argument("path", type=Path)
     viewer = commands.add_parser("watch", help="Watch a verified record in the terminal")
@@ -50,9 +53,10 @@ def main(argv: Optional[list[str]] = None) -> int:
             parser.error("--step requires an interactive terminal without --plain")
     try:
         if args.command == "simulate":
-            initial = create_game(dealer=args.dealer, rng=random.Random(args.seed))
+            config = SettlementConfig(args.base, args.tai_value)
+            initial = create_game(dealer=args.dealer, rng=random.Random(args.seed), round_wind=tile_kind(args.round_wind))
             policies = tuple(SimplePolicy(random.Random(args.seed * 4 + player + 1)) for player in range(4))
-            result = simulate(initial, policies)
+            result = simulate(initial, policies, settlement_config=config)
             if args.output is not None:
                 text = record_to_json(result)
                 with args.output.open("x", encoding="utf-8", newline="\n") as stream:

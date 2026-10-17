@@ -6,7 +6,7 @@ from random import Random
 from typing import Callable, Iterator
 
 from .engine import apply_action, legal_actions, validate_state
-from .model import Action, ActionKind, GameState, MahjongError, Phase, ReplayFrame, SimulationResult
+from .model import Action, ActionKind, GameState, MahjongError, Phase, ReplayFrame, SettlementConfig, SimulationResult
 
 Policy = Callable[[GameState, int], Action]
 
@@ -21,7 +21,10 @@ class SimplePolicy:
         options = legal_actions(state, player)
         if not options:
             raise MahjongError("INVALID_POLICY", "Player has no legal actions")
-        for kind in (ActionKind.HU, ActionKind.PENG, ActionKind.CHI, ActionKind.DRAW):
+        priorities = (ActionKind.HU, ActionKind.PENG, ActionKind.CHI, ActionKind.DRAW)
+        if state.rules_version == 2:
+            priorities = (ActionKind.HU, ActionKind.KONG_EXPOSED, ActionKind.KONG_CONCEALED, ActionKind.KONG_ADDED, ActionKind.PENG, ActionKind.CHI, ActionKind.DRAW)
+        for kind in priorities:
             for action in options:
                 if action.kind is kind:
                     return action
@@ -31,8 +34,13 @@ class SimplePolicy:
         return next(action for action in options if action.kind is ActionKind.PASS)
 
 
-def simulate(initial_state: GameState, policies: tuple[Policy, ...]) -> SimulationResult:
+def simulate(initial_state: GameState, policies: tuple[Policy, ...], *, settlement_config: SettlementConfig = SettlementConfig()) -> SimulationResult:
     validate_state(initial_state)
+    if not isinstance(settlement_config, SettlementConfig):
+        raise MahjongError("INVALID_SETTLEMENT", "Expected SettlementConfig")
+    settlement_config.__post_init__()
+    if initial_state.rules_version == 1 and settlement_config != SettlementConfig():
+        raise MahjongError("INVALID_SETTLEMENT", "Legacy games have no scoring configuration")
     if not isinstance(policies, tuple) or len(policies) != 4 or not all(callable(policy) for policy in policies):
         raise MahjongError("INVALID_POLICY", "Expected a tuple of four callable policies")
     state = initial_state
@@ -53,7 +61,7 @@ def simulate(initial_state: GameState, policies: tuple[Policy, ...]) -> Simulati
                 break
         else:
             raise MahjongError("INVALID_STATE", "Unfinished game has no legal actions")
-    return SimulationResult(initial_state, state, tuple(actions))
+    return SimulationResult(initial_state, state, tuple(actions), settlement_config)
 
 
 def replay(initial_state: GameState, actions: tuple[Action, ...]) -> GameState:

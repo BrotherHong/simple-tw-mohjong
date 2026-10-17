@@ -5,7 +5,7 @@ from functools import lru_cache
 from .model import Decomposition, HandAnalysis, MahjongError, Meld, Tile
 
 
-def analyze_hand(hand: tuple[Tile, ...], melds: tuple[Meld, ...] = ()) -> HandAnalysis:
+def _validate_hand(hand: tuple[Tile, ...], melds: tuple[Meld, ...], total: int) -> list[int]:
     if not isinstance(melds, tuple) or len(melds) > 5:
         raise MahjongError("INVALID_MELD", "Expected at most five melds")
     for meld in melds:
@@ -14,7 +14,7 @@ def analyze_hand(hand: tuple[Tile, ...], melds: tuple[Meld, ...] = ()) -> HandAn
         meld.__post_init__()
     if not isinstance(hand, tuple) or not all(isinstance(t, Tile) and not t.is_flower for t in hand):
         raise MahjongError("INVALID_HAND", "Hand requires ordinary physical tiles")
-    if len(hand) != 17 - 3 * len(melds):
+    if len(hand) != total - 3 * len(melds):
         raise MahjongError("INVALID_HAND", "Wrong concealed tile count for meld count")
     tiles = hand + tuple(t for meld in melds for t in meld.tiles)
     if len({t.id for t in tiles}) != len(tiles):
@@ -22,6 +22,23 @@ def analyze_hand(hand: tuple[Tile, ...], melds: tuple[Meld, ...] = ()) -> HandAn
     counts = [0] * 34
     for tile in hand:
         counts[tile.kind] += 1
+    return counts
+
+
+def find_waits(hand: tuple[Tile, ...], melds: tuple[Meld, ...] = ()) -> tuple[int, ...]:
+    _validate_hand(hand, melds, 16)
+    used = {tile.id for tile in hand}
+    used.update(tile.id for meld in melds for tile in meld.tiles)
+    waits = []
+    for kind in range(34):
+        candidate = next((Tile(i) for i in range(kind * 4, kind * 4 + 4) if i not in used), None)
+        if candidate is not None and analyze_hand(hand + (candidate,), melds).winning:
+            waits.append(kind)
+    return tuple(waits)
+
+
+def analyze_hand(hand: tuple[Tile, ...], melds: tuple[Meld, ...] = ()) -> HandAnalysis:
+    counts = _validate_hand(hand, melds, 17)
 
     @lru_cache(maxsize=None)
     def split(remaining: tuple[int, ...]) -> tuple[tuple[tuple[int, int, int], ...], ...]:

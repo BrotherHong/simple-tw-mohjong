@@ -64,6 +64,9 @@ def full_deck() -> tuple[Tile, ...]:
 class MeldKind(Enum):
     CHI = "CHI"
     PENG = "PENG"
+    KONG_EXPOSED = "KONG_EXPOSED"
+    KONG_CONCEALED = "KONG_CONCEALED"
+    KONG_ADDED = "KONG_ADDED"
 
 
 def is_sequence(kinds: tuple[int, ...]) -> bool:
@@ -79,28 +82,32 @@ def is_sequence(kinds: tuple[int, ...]) -> bool:
 class Meld:
     kind: MeldKind
     tiles: tuple[Tile, ...]
-    source: int
-    claimed_tile: int
+    source: Optional[int]
+    claimed_tile: Optional[int]
 
     def __post_init__(self) -> None:
         valid_tiles = (
             isinstance(self.tiles, tuple)
-            and len(self.tiles) == 3
+            and len(self.tiles) == (4 if self.kind in (MeldKind.KONG_EXPOSED, MeldKind.KONG_CONCEALED, MeldKind.KONG_ADDED) else 3)
             and all(isinstance(t, Tile) and not t.is_flower for t in self.tiles)
         )
         if not valid_tiles:
-            raise MahjongError("INVALID_MELD", "A meld needs three ordinary physical tiles")
+            raise MahjongError("INVALID_MELD", "A meld needs three or four ordinary physical tiles")
         ids = tuple(t.id for t in self.tiles)
         if ids != tuple(sorted(set(ids))):
             raise MahjongError("INVALID_MELD", "Meld tile ids must be unique and sorted")
-        if not is_int(self.source) or not 0 <= self.source < 4:
-            raise MahjongError("INVALID_MELD", "Invalid meld source")
-        if not is_int(self.claimed_tile) or self.claimed_tile not in ids:
-            raise MahjongError("INVALID_MELD", "Claimed tile must belong to meld")
+        if self.kind is MeldKind.KONG_CONCEALED:
+            if self.source is not None or self.claimed_tile is not None:
+                raise MahjongError("INVALID_MELD", "Concealed kong has no external source")
+        else:
+            if not is_int(self.source) or not 0 <= self.source < 4:
+                raise MahjongError("INVALID_MELD", "Invalid meld source")
+            if not is_int(self.claimed_tile) or self.claimed_tile not in ids:
+                raise MahjongError("INVALID_MELD", "Claimed tile must belong to meld")
         kinds = tuple(t.kind for t in self.tiles)
         if self.kind is MeldKind.CHI and is_sequence(kinds):
             return
-        if self.kind is MeldKind.PENG and len(set(kinds)) == 1:
+        if self.kind in (MeldKind.PENG, MeldKind.KONG_EXPOSED, MeldKind.KONG_CONCEALED, MeldKind.KONG_ADDED) and len(set(kinds)) == 1:
             return
         raise MahjongError("INVALID_MELD", "Meld must be a sequence or triplet")
 
@@ -109,6 +116,7 @@ class Phase(Enum):
     DRAW = "DRAW"
     DISCARD = "DISCARD"
     RESPONSE = "RESPONSE"
+    ROB_KONG = "ROB_KONG"
     ENDED = "ENDED"
 
 
@@ -119,12 +127,23 @@ class ActionKind(Enum):
     PENG = "PENG"
     HU = "HU"
     PASS = "PASS"
+    KONG_EXPOSED = "KONG_EXPOSED"
+    KONG_CONCEALED = "KONG_CONCEALED"
+    KONG_ADDED = "KONG_ADDED"
 
 
 class EndReason(Enum):
     SELF_DRAW = "SELF_DRAW"
     DISCARD_WIN = "DISCARD_WIN"
     WALL_EXHAUSTED = "WALL_EXHAUSTED"
+    ROB_KONG = "ROB_KONG"
+
+
+class DrawSource(Enum):
+    INITIAL = "INITIAL"
+    NORMAL = "NORMAL"
+    FLOWER = "FLOWER"
+    KONG = "KONG"
 
 
 @dataclass(frozen=True)
@@ -148,6 +167,13 @@ class PendingDiscard:
 
 
 @dataclass(frozen=True)
+class PendingKong:
+    player: int
+    tile: Tile
+    meld_index: int
+
+
+@dataclass(frozen=True)
 class GameState:
     wall: Wall
     players: tuple[PlayerState, ...]
@@ -162,6 +188,12 @@ class GameState:
     win_source: Optional[int] = None
     winning_tile: Optional[int] = None
     end_reason: Optional[EndReason] = None
+    rules_version: int = 2
+    round_wind: int = 27
+    draw_source: Optional[DrawSource] = None
+    pending_kong: Optional[PendingKong] = None
+    robbed_tile: Optional[Tile] = None
+    last_discard_last: bool = False
 
 
 class EventKind(Enum):
@@ -173,6 +205,8 @@ class EventKind(Enum):
     TURN = "TURN"
     WON = "WON"
     EXHAUSTED = "EXHAUSTED"
+    KONG_DECLARED = "KONG_DECLARED"
+    KONG_COMPLETED = "KONG_COMPLETED"
 
 
 @dataclass(frozen=True)
@@ -202,10 +236,21 @@ class HandAnalysis:
 
 
 @dataclass(frozen=True)
+class SettlementConfig:
+    base: int = 100
+    tai_value: int = 20
+
+    def __post_init__(self) -> None:
+        if not is_int(self.base) or self.base < 0 or not is_int(self.tai_value) or self.tai_value <= 0:
+            raise MahjongError("INVALID_SETTLEMENT", "Base must be nonnegative and tai_value positive integers")
+
+
+@dataclass(frozen=True)
 class SimulationResult:
     initial_state: GameState
     final_state: GameState
     actions: tuple[Action, ...]
+    settlement_config: SettlementConfig = SettlementConfig()
 
 
 @dataclass(frozen=True)
@@ -214,3 +259,32 @@ class ReplayFrame:
     state: GameState
     action: Optional[Action]
     events: tuple[Event, ...]
+
+
+@dataclass(frozen=True, order=True)
+class ScoreItem:
+    code: str
+    tai: int
+
+
+@dataclass(frozen=True)
+class ScoreResult:
+    tai: int
+    items: tuple[ScoreItem, ...]
+    decomposition: Optional[Decomposition]
+    winning_group: Optional[tuple[int, int, int]]
+
+
+@dataclass(frozen=True)
+class Payment:
+    payer: int
+    payee: int
+    tai: int
+    amount: int
+
+
+@dataclass(frozen=True)
+class Settlement:
+    score: ScoreResult
+    payments: tuple[Payment, ...]
+    deltas: tuple[int, int, int, int]
