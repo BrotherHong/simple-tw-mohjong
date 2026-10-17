@@ -7,10 +7,12 @@ from .model import (
 )
 from .wall import Wall
 from .hand import analyze_hand
+from .engine import apply_action, create_game, legal_actions, validate_state
 
 __all__ = [
     "Action", "ActionKind", "Decomposition", "EndReason", "Event", "EventKind",
     "GameState", "HandAnalysis", "MahjongError", "Meld", "MeldKind",
     "PendingDiscard", "Phase", "PlayerState", "SimulationResult", "Tile",
     "Transition", "Wall", "full_deck", "tile_kind", "analyze_hand",
+    "apply_action", "create_game", "legal_actions", "validate_state",
 ]
