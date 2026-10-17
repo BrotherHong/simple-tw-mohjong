@@ -35,6 +35,14 @@ py -3.10 -m venv .venv
 
 程式接受相同 seed 與莊家時，使用相同洗牌及策略亂數來源。紀錄包含完整初態、操作序列與末態；重播不依賴 seed。載入紀錄時會逐步重播，拒絕與操作不符的末態。
 
+0.3.0 起，CLI 預設採用基本牌效率策略。相同 seed 在新預設下可能產生不同牌局；重現原本隨機出牌策略時指定：
+
+```powershell
+.venv\Scripts\python -m tw_mahjong simulate --seed 17 --dealer 2 --policy simple
+```
+
+`--policy basic` 會依自己的手牌結構選擇棄牌，並比較吃碰後再棄一張是否改善結構；只有改善才吃碰。胡與槓沿用既有優先順序。此策略不讀取他家暗手或牌牆順序。
+
 新牌局產生 JSON v2，保存圈風、摸牌背景、結算設定與重算後的付款資訊。舊 JSON v1 使用原規則重播、禁止槓且不補算計台；播放器會明示未包含計分資訊。`replay` 仍只輸出原有摘要。
 
 結算使用抽象分數，預設底分 100、每台 20；圈風預設東風，可自行設定：
@@ -45,37 +53,53 @@ py -3.10 -m venv .venv
 
 ### 播放控制
 
-播放器從發牌完成的四家起手狀態開始，顯示全部手牌、副露、花、河牌、階段與近期事件；適合使用較寬且較高的終端機視窗。數牌使用 m／p／s，字牌使用 E／S／W／N／R／G／B，花牌使用 F1–F8。
+播放器從發牌完成的四家起手狀態開始。互動畫面以 `[一萬] [二筒] [三索]` 等中文牌塊顯示，依花色著色；每家獨立分開手牌、副露、花牌及河牌，並標示莊家、目前玩家與剛摸入／打出的 `*` 牌。
+
+視窗至少 120 欄時採兩欄兩列，較窄時採直列；縮放時會重新排版。建議使用約 120 欄、50 列或更高的終端機，讓四家牌與結果明細有足夠空間。河牌只顯示最近 12 張，並標示完整數量與省略數；完整河牌可用 `--plain` 查看。
+
+一般播放會略過純 PASS 的等待，仍完整執行原始紀錄。最後一筆 PASS 若觸發吃碰槓胡，仍顯示實際成立的結果；未裁決的吃碰胡意向會標示為「申請」。原範例的 334 個操作可縮成 150 個可見步驟，最終結果相同。
 
 | 操作 | 功能 |
 |---|---|
 | 空白 | 暫停／繼續 |
-| n 或 Enter | 前進一個操作並暫停 |
+| n 或 Enter | 前進一個可見步驟並暫停 |
 | +／- | 速度加倍／減半 |
 | q | 提前離開 |
 | Ctrl+C | 中斷，exit code 130 |
 
-`--speed` 是每秒操作數，預設 2，範圍 0.25–64；`--step` 初始暫停。播完顯示計台、付款及四家分數增減後返回終端機，保留結果畫面。補花等同一操作的多個事件會一起顯示。離開時還原游標及終端機模式。
+`--speed` 是每秒可見步驟數，預設 2，範圍 0.25–64；`--step` 初始暫停。頂部另列原始操作 index、摸牌及出牌次數，不把包含回應的操作數當作回合數。播完顯示計台、付款及四家分數增減後返回終端機，保留結果畫面。補花等同一操作的多個事件會一起顯示。離開時還原游標及終端機模式。
+
+顯示選項：
+
+```powershell
+.venv\Scripts\python -m tw_mahjong watch game.json --detail
+.venv\Scripts\python -m tw_mahjong watch game.json --ascii --no-color
+```
+
+`--detail` 播放全部原始操作，包含 PASS 與回應登記；`--ascii` 切換成牌代碼及英文標籤；`--no-color` 關閉牌塊顏色。stdout 編碼不能表示中文時自動採 ASCII，不偵測字型。文字與 `*` 標記不依賴顏色。數牌代碼為 m／p／s，字牌為 E／S／W／N／R／G／B，花牌為 F1–F8。
 
 非互動輸入／輸出會自動改用無延遲、無 ANSI 的逐步文字紀錄，也可明確指定：
 
 ```powershell
 .venv\Scripts\python -m tw_mahjong watch game.json --plain > transcript.txt
+.venv\Scripts\python -m tw_mahjong watch game.json --plain --detail > all-actions.txt
 ```
 
 `--step` 不能搭配 `--plain` 或輸出重新導向。播放速度不改變牌局結果，也不寫入紀錄。
+
+跨平台使用標準函式庫：Windows 採 console/MSVCRT，macOS／Linux 等 POSIX 系統採 termios。已實際驗證 Windows；其他平台尚未實機驗證。`--plain` 不使用游標控制、色彩或鍵盤等待。
 
 ## Python 介面
 
 ```python
 from random import Random
 from tw_mahjong import (
-    SimplePolicy, create_game, simulate, replay,
+    BasicEfficiencyPolicy, create_game, simulate, replay,
     record_to_json, record_from_json, score_hand, settle_hand,
 )
 
 initial = create_game(rng=Random(17))
-policies = tuple(SimplePolicy(Random(100 + player)) for player in range(4))
+policies = tuple(BasicEfficiencyPolicy(Random(100 + player)) for player in range(4))
 result = simulate(initial, policies)
 print(result.final_state.end_reason.value)
 
@@ -110,6 +134,17 @@ from tw_mahjong import find_waits
 print(find_waits(hand[:-1]))  # (31,)：中
 ```
 
+基本策略的結構分數可直接使用：
+
+```python
+from tw_mahjong import evaluate_structure
+print(evaluate_structure(hand[:-1]))  # 62：五個完整面子 60，加門清 2
+```
+
+此函式接受等效 16 張手牌。順子／刻子 12、對子 4、相鄰兩張 3、隔一張 2、孤張 0，每組既有面子 12，門清另加 2。採最佳不重複分組，因此同一張牌不會同時計入多個結構。結構分數不是胡牌台數。出牌最高分同分時由注入的亂數選擇；吃碰同分時先碰後吃，再依實體牌 id 排序。
+
+原本 `SimplePolicy` 保留不變，Python 的 `simulate` 仍由呼叫端明確傳入四個策略，不會自行換掉策略。新策略不寫入 JSON，既有 v1／v2 紀錄繼續依原操作重播。
+
 使用 `legal_actions(state, player)` 查詢，再以 `apply_action(state, action)` 取得 `Transition`（新狀態與事件）。資料為不可變物件，非法操作不會改變原狀態。`MahjongError.code` 是穩定錯誤碼，完整清單與優先序契約見 spec。
 
 `RESPONSE` 階段須讓出牌者以外的三人各回應一次，包括只能過牌的玩家。前兩次僅登記意向，第三次才裁決。玩家座次採 `0 → 1 → 2 → 3 → 0`，莊家可以是任一座次。
@@ -141,6 +176,8 @@ print(settle_hand(final_state, SettlementConfig(base=100, tai_value=20)))
 | JSON 紀錄 | [records.py](src/tw_mahjong/records.py) | 嚴格格式檢查與重播核對 |
 | 計台與結算 | [scoring.py](src/tw_mahjong/scoring.py) | 枚舉胡牌落點、選最高台、逐付款方結算 |
 | 終端機播放器 | [playback.py](src/tw_mahjong/playback.py) | 呈現逐步快照、處理按鍵與顯示速度 |
+| 牌塊盤面 | [board.py](src/tw_mahjong/board.py) | 中文／ASCII 牌塊、欄寬排版與四家分區 |
+| 基本電腦策略 | [policies.py](src/tw_mahjong/policies.py) | 不重複結構分組評分與吃碰／出牌選擇 |
 
 ## 開發與交付
 
@@ -157,3 +194,5 @@ git status --short --branch
 Git 提交順序為規格與環境、牌模型與牌牆、胡牌分析、初始化與狀態機、模擬與紀錄、最終文件與核對。虛擬環境、下載的直譯器、快取及建置產物不納入版本控制。
 
 第二階段先提交規格，再提交逐步重播與播放器；槓、計台與 v2 紀錄因共用資料契約一併提交，最後補齊文件與核對。
+
+0.3 階段依序提交規格、PASS 播放過濾、牌塊與四家分區、基本策略及整合文件；沒有改動規則引擎或紀錄格式。

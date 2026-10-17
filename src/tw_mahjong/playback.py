@@ -78,7 +78,9 @@ def _visible_frames(result: SimulationResult, detail: bool = False) -> tuple[_Pl
         primary = main_action(frame, detail)
         if primary is not None:
             ids = " ".join(Tile(i).code for i in primary.tiles)
-            recent.append(f"P{primary.player} {primary.kind.value}{' ' + ids if ids else ''}")
+            request = not detail and frame.events and all(event.kind is EventKind.RESPONSE for event in frame.events)
+            name = ("REQUEST_" if request else "") + primary.kind.value
+            recent.append(f"P{primary.player} {name}{' ' + ids if ids else ''}")
         for event in frame.events:
             if not detail and event.kind is EventKind.RESPONSE:
                 continue

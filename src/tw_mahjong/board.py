@@ -97,17 +97,23 @@ def _action_text(frame: ReplayFrame, primary: Optional[Action], *, ascii_tiles: 
     if primary is None:
         return ("Initial board" if frame.index == 0 else "Response recorded",) if ascii_tiles else ("起手盤面" if frame.index == 0 else "回應已登記",)
     name = primary.kind.value if ascii_tiles else _ACTIONS[primary.kind.value]
+    request = frame.events and all(event.kind is EventKind.RESPONSE for event in frame.events) and primary.kind is not ActionKind.PASS
+    if request:
+        name = "request " + name if ascii_tiles else "申請" + name
     if primary.kind is ActionKind.KONG_ADDED:
         declared = any(event.kind is EventKind.KONG_DECLARED for event in frame.events)
         suffix = " declared" if declared else " completed"
         name = name + suffix if ascii_tiles else ("宣告加槓" if declared else "加槓成立")
     ids = set(primary.tiles)
+    pending = frame.state.pending or frame.state.pending_kong
+    if request and pending is not None:
+        ids.add(pending.tile.id)
     for event in frame.events:
         if event.action == primary and event.tile is not None and event.kind in (
             EventKind.DRAWN, EventKind.DISCARDED, EventKind.CLAIMED, EventKind.KONG_COMPLETED, EventKind.WON,
         ):
             ids.add(event.tile)
-    return (f"P{primary.player} {name}",) + tuple(
+    return (f"P{primary.player}", name) + tuple(
         tile_block(Tile(i), ascii_tiles=ascii_tiles, color=color) for i in sorted(ids)
     )
 
@@ -184,7 +190,7 @@ def render_board(frame: ReplayFrame, result: SimulationResult, recent: tuple[str
     label = "Action:" if ascii_tiles else "主要動作:"
     lines.extend(_wrap_tokens((label,) + _action_text(frame, primary, ascii_tiles=ascii_tiles, color=color), columns))
     lines.append("Recent events:" if ascii_tiles else "近期事件:")
-    translations = {**_ACTIONS, **_EVENTS}
+    translations = {**_ACTIONS, **_EVENTS, **{"REQUEST_" + key: "申請" + value for key, value in _ACTIONS.items()}}
     for event in recent:
         if not ascii_tiles:
             event = re.sub(r"\b[A-Z_]+\b", lambda match: translations.get(match[0], match[0]), event)

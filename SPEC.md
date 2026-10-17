@@ -161,6 +161,7 @@ CLI 使用 `Random(seed)` 洗牌，座次 p 的策略使用 `Random(seed * 4 + p
 
 - **VIEW-001**：watch 預設跳過純 PASS 操作。若 PASS 的 events 含 CLAIMED、KONG_COMPLETED、DRAWN、FLOWER、WON 或 EXHAUSTED，仍顯示裁決結果。原始 index 0 與紀錄最後一個 index 一律保留，包括空紀錄、未結束前綴與最後一筆純 PASS。iter_replay、replay、核心狀態與 JSON 格式不變。
 - **VIEW-002**：新增 --detail 顯示全部原始操作及 RESPONSE 事件；預設近期事件不顯示 PASS 或 RESPONSE，主要操作以 WON、KONG_COMPLETED、CLAIMED 的 action 優先，其次為非 PASS 的原操作。加槓宣告與成立分別顯示。純 TURN 不作為 PASS 的獨立可見步驟。
+- **VIEW-004**：尚未裁決的非 PASS 回應以「申請」標示，避免把可能被更高優先權覆蓋的意向當成已成立副露或胡牌。一般模式近期事件採 REQUEST_CHI 等明確標記，詳細模式保留原始動作名稱。
 - **VIEW-003**：speed 改為每秒可見步驟，n/Enter 前進至下一個可見步驟。初態顯示進度 0/N，其餘為 1..N；N 不含初態。頂部另顯示原始 index 與累積 DRAW、DISCARD 數量，名稱為操作／摸牌／出牌，不稱為回合。--detail 與 --plain 可組合；--plain 仍預設過濾純 PASS。
 - **BOARD-001**：互動畫面預設中文牌塊。數牌為 [一萬]..[九萬]、[一筒]..[九筒]、[一索]..[九索]；字牌中文名稱加空白對齊；F1..F8 為春夏秋冬梅蘭竹菊。牌塊使用 ASCII 方括號，每塊顯示寬度固定 6 欄。ANSI 裝飾不算寬度，中文 W/F 字元算兩欄，其餘字元算一欄。
 - **BOARD-002**：萬紅、筒藍、索綠、字黃、花紫；--no-color 關閉所有樣式色彩，但互動畫面仍使用游標控制。--ascii 使用英文字與牌代碼，所有牌塊同樣補齊為 6 欄。若 stdout 編碼不能表示中文介面字元，自動採 ASCII；不推測字型支援。
