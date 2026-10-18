@@ -1,7 +1,7 @@
 #Requires -Version 5.1
 param(
     [Parameter(Mandatory)][ValidateSet('first', 'second', 'third')][string] $Run,
-    [string] $Mutants = 'mutation/all-mutants.sqlite',
+    [string] $Mutants = 'mutation/sampled-mutants.sqlite',
     [switch] $Resume
 )
 
