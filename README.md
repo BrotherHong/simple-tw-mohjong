@@ -6,17 +6,32 @@
 
 ## 使用教學
 
-以下指令請在專案根目錄執行，並先安裝 Python 3.10.x。
+以下指令請在專案根目錄執行。若已有 `.venv`，可直接啟用；首次建立環境則需先安裝 Python 3.10.x。
 
 ### 1. 建立與啟用虛擬環境
 
 **Windows PowerShell**
 
+已有虛擬環境時：
+
 ```powershell
-# Create and activate the Python 3.10 environment.
+# Activate the existing environment.
+.\.venv\Scripts\Activate.ps1
+```
+
+首次建立時：
+
+```powershell
+# Create and activate a Python 3.10 environment.
 py -3.10 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+```
 
+`py -3.10` 需要已安裝並登錄 Python 3.10，可用 `py -0p` 檢查。若未列出，請先安裝 Python 3.10，或改用該版本 `python.exe` 的完整路徑執行 `-m venv .venv`。
+
+啟用後安裝專案並建立輸出目錄：
+
+```powershell
 # Install the project and prepare the output directory.
 python -m pip install -e .
 New-Item -ItemType Directory -Force output | Out-Null
@@ -24,17 +39,35 @@ New-Item -ItemType Directory -Force output | Out-Null
 
 **macOS／Linux**
 
+已有虛擬環境時：
+
 ```bash
-# Create and activate the Python 3.10 environment.
+# Activate the existing environment.
+source .venv/bin/activate
+```
+
+首次建立時：
+
+```bash
+# Create and activate a Python 3.10 environment.
 python3.10 -m venv .venv
 source .venv/bin/activate
+```
 
+啟用後安裝專案並建立輸出目錄：
+
+```bash
 # Install the project and prepare the output directory.
 python -m pip install -e .
 mkdir -p output
 ```
 
-啟用後可用 `python --version` 確認版本為 3.10。若無法啟用環境，可直接使用 Windows 的 `.venv\Scripts\python`，或 macOS／Linux 的 `.venv/bin/python` 取代後續的 `python`。
+啟用後可用 `python --version` 確認版本為 3.10。若缺少啟用腳本或無法啟用，可直接使用 Windows 的 `.\.venv\Scripts\python.exe`，或 macOS／Linux 的 `.venv/bin/python` 取代後續的 `python`，不必先啟用。例如已有 `output/game.json` 時：
+
+```powershell
+# Watch a saved game without activating the environment.
+.\.venv\Scripts\python.exe -m tw_mahjong watch output/game.json --speed 2
+```
 
 ### 2. 產生對局
 
