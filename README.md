@@ -1,198 +1,112 @@
-# 台灣麻將受測專案
+# 簡易台灣麻將模擬器
 
-Python **3.10.x** 的簡化台灣十六張麻將規則核心，提供其他測試撰寫工具作為受測程式。完整功能契約見 [SPEC.md](SPEC.md)。專案不包含測試程式、故意缺陷或評分工具。
+使用 **Python 3.10.x** 模擬四人台灣十六張麻將，提供電腦對局、紀錄重播與可調速的終端機觀戰。
 
-## 環境與安裝
+支援摸打、吃碰、明槓／暗槓／加槓、搶槓、補花、聽牌分析及固定牌型計分。採單局簡化規則，也可作為測試撰寫工具的實驗專案；詳細功能與限制見 [SPEC.md](SPEC.md)。
 
-先安裝 Python 3.10.x，並確認 Windows Python Launcher 能以 `py -3.10` 找到該版本。
+## 使用教學
+
+以下指令請在專案根目錄執行，並先安裝 Python 3.10.x。
+
+### 1. 建立與啟用虛擬環境
+
+**Windows PowerShell**
 
 ```powershell
+# Create and activate the Python 3.10 environment.
 py -3.10 -m venv .venv
-.venv\Scripts\python -m pip install -e .
+.\.venv\Scripts\Activate.ps1
+
+# Install the project and prepare the output directory.
+python -m pip install -e .
+New-Item -ItemType Directory -Force output | Out-Null
 ```
 
-執行期只使用 Python 標準函式庫。開發主線為 `main`，各元件與對應規格一起提交。
+**macOS／Linux**
 
-## 開發範圍
+```bash
+# Create and activate the Python 3.10 environment.
+python3.10 -m venv .venv
+source .venv/bin/activate
 
-牌模型與牌牆、胡牌與聽牌分析、合法操作、牌局狀態機、四人模擬、JSON 重播及終端機觀戰。支援摸打、吃碰、明槓／暗槓／加槓、搶槓、補花、固定牌型計台及單局結算。
-
-不包含真人出牌、多局連莊、完整一將、特殊花牌胡、過水、網路連線及圖形介面；計台僅採用 spec 中明列的固定子集。
-
-## 執行模擬與重播
-
-安裝後，不需啟用虛擬環境即可執行：
-
-```powershell
-.venv\Scripts\python -m tw_mahjong simulate --seed 17
-.venv\Scripts\python -m tw_mahjong simulate --seed 17 --dealer 2 --output game.json
-.venv\Scripts\python -m tw_mahjong replay game.json
-.venv\Scripts\python -m tw_mahjong watch game.json --speed 2
-.venv\Scripts\python -m tw_mahjong watch game.json --step
+# Install the project and prepare the output directory.
+python -m pip install -e .
+mkdir -p output
 ```
 
-也可使用 `.venv\Scripts\tw-mahjong.exe`。摘要為 JSON，包含結束原因、贏家、胡牌來源玩家、胡牌實體 id、操作數及剩餘牌數；自摸時來源玩家為自己，流局時為 null。`--output` 拒絕覆寫既有檔案。模擬生成的檔案請放在已忽略的 `output/`，或自行指定其他位置，父目錄須已存在。
+啟用後可用 `python --version` 確認版本為 3.10。若無法啟用環境，可直接使用 Windows 的 `.venv\Scripts\python`，或 macOS／Linux 的 `.venv/bin/python` 取代後續的 `python`。
 
-程式接受相同 seed 與莊家時，使用相同洗牌及策略亂數來源。紀錄包含完整初態、操作序列與末態；重播不依賴 seed。載入紀錄時會逐步重播，拒絕與操作不符的末態。
+### 2. 產生對局
 
-0.3.0 起，CLI 預設採用基本牌效率策略。相同 seed 在新預設下可能產生不同牌局；重現原本隨機出牌策略時指定：
-
-```powershell
-.venv\Scripts\python -m tw_mahjong simulate --seed 17 --dealer 2 --policy simple
+```bash
+# Simulate a game and save its replay record.
+python -m tw_mahjong simulate --seed 17 --dealer 2 --output output/game.json
 ```
 
-`--policy basic` 會依自己的手牌結構選擇棄牌，並比較吃碰後再棄一張是否改善結構；只有改善才吃碰。胡與槓沿用既有優先順序。此策略不讀取他家暗手或牌牆順序。
+預設使用基本牌效率策略；加上 `--policy simple` 可改用原本的隨機出牌策略。同一策略與參數可重現相同結果。紀錄不會覆寫既有檔案，重新產生時請換檔名。
 
-新牌局產生 JSON v2，保存圈風、摸牌背景、結算設定與重算後的付款資訊。舊 JSON v1 使用原規則重播、禁止槓且不補算計台；播放器會明示未包含計分資訊。`replay` 仍只輸出原有摘要。
+### 3. 觀看對局
 
-結算使用抽象分數，預設底分 100、每台 20；圈風預設東風，可自行設定：
-
-```powershell
-.venv\Scripts\python -m tw_mahjong simulate --seed 17 --base 50 --tai-value 10 --round-wind S
+```bash
+# Watch the saved game at two visible steps per second.
+python -m tw_mahjong watch output/game.json --speed 2
 ```
 
-### 播放控制
+播放器從發牌完成開始，顯示四家手牌、副露、花牌與河牌，結束後列出計台及分數增減。預設略過純 PASS，仍保留其觸發的吃碰槓胡結果。
 
-播放器從發牌完成的四家起手狀態開始。互動畫面以 `[一萬] [二筒] [三索]` 等中文牌塊顯示，依花色著色；每家獨立分開手牌、副露、花牌及河牌，並標示莊家、目前玩家與剛摸入／打出的 `*` 牌。
-
-視窗至少 120 欄時採兩欄兩列，較窄時採直列；縮放時會重新排版。建議使用約 120 欄、50 列或更高的終端機，讓四家牌與結果明細有足夠空間。河牌只顯示最近 12 張，並標示完整數量與省略數；完整河牌可用 `--plain` 查看。
-
-一般播放會略過純 PASS 的等待，仍完整執行原始紀錄。最後一筆 PASS 若觸發吃碰槓胡，仍顯示實際成立的結果；未裁決的吃碰胡意向會標示為「申請」。原範例的 334 個操作可縮成 150 個可見步驟，最終結果相同。
-
-| 操作 | 功能 |
+| 按鍵 | 功能 |
 |---|---|
 | 空白 | 暫停／繼續 |
-| n 或 Enter | 前進一個可見步驟並暫停 |
-| +／- | 速度加倍／減半 |
-| q | 提前離開 |
-| Ctrl+C | 中斷，exit code 130 |
+| n 或 Enter | 單步並暫停 |
+| +／- | 加速／減速 |
+| q | 離開 |
 
-`--speed` 是每秒可見步驟數，預設 2，範圍 0.25–64；`--step` 初始暫停。頂部另列原始操作 index、摸牌及出牌次數，不把包含回應的操作數當作回合數。播完顯示計台、付款及四家分數增減後返回終端機，保留結果畫面。補花等同一操作的多個事件會一起顯示。離開時還原游標及終端機模式。
+| 選項 | 用途 |
+|---|---|
+| `--speed N` | 每秒可見步驟數，範圍 0.25–64 |
+| `--step` | 從暫停開始，方便逐步觀看 |
+| `--detail` | 顯示全部操作，包含 PASS |
+| `--ascii --no-color` | 使用英文牌代碼並關閉顏色 |
+| `--plain` | 輸出純文字，保留完整河牌 |
 
-顯示選項：
+建議使用至少 120 欄的終端機，顯示兩欄四家盤面；較窄時改為直列。互動畫面河牌顯示最近 12 張，`*` 標記剛摸入或打出的牌。Windows 已實際驗證，macOS／Linux 尚未實機驗證。
 
-```powershell
-.venv\Scripts\python -m tw_mahjong watch game.json --detail
-.venv\Scripts\python -m tw_mahjong watch game.json --ascii --no-color
+```bash
+# Export the complete action log without terminal controls.
+python -m tw_mahjong watch output/game.json --plain --detail > output/transcript.txt
 ```
 
-`--detail` 播放全部原始操作，包含 PASS 與回應登記；`--ascii` 切換成牌代碼及英文標籤；`--no-color` 關閉牌塊顏色。stdout 編碼不能表示中文時自動採 ASCII，不偵測字型。文字與 `*` 標記不依賴顏色。數牌代碼為 m／p／s，字牌為 E／S／W／N／R／G／B，花牌為 F1–F8。
+`--step` 需要互動終端機，不能搭配 `--plain` 或輸出重新導向。
 
-非互動輸入／輸出會自動改用無延遲、無 ANSI 的逐步文字紀錄，也可明確指定：
+### 4. 查看摘要與離開環境
 
-```powershell
-.venv\Scripts\python -m tw_mahjong watch game.json --plain > transcript.txt
-.venv\Scripts\python -m tw_mahjong watch game.json --plain --detail > all-actions.txt
+```bash
+# Validate the record and print the final summary.
+python -m tw_mahjong replay output/game.json
+
+# Leave the virtual environment when finished.
+deactivate
 ```
 
-`--step` 不能搭配 `--plain` 或輸出重新導向。播放速度不改變牌局結果，也不寫入紀錄。
+## 開發注意事項
 
-跨平台使用標準函式庫：Windows 採 console/MSVCRT，macOS／Linux 等 POSIX 系統採 termios。已實際驗證 Windows；其他平台尚未實機驗證。`--plain` 不使用游標控制、色彩或鍵盤等待。
+- 固定使用 Python 3.10；執行期只有標準函式庫，使用 `pip install -e .` 方便開發。
+- 功能與介面以 [SPEC.md](SPEC.md) 為準，行為變更應同步更新規格。
+- 核心資料保持不可變，亂數由呼叫端注入；呈現層的速度與按鍵不可影響牌局結果。
+- 保留 JSON v1／v2 相容性；重播使用已保存的操作，不重新呼叫電腦策略。
+- 專案供外部工具產生測試，不附測試程式。修改後可編譯檢查，並直接模擬或重播核對。
+- 主線為 `main`，依完整工作階段提交；虛擬環境、快取、建置及 `output/` 產物不納入 Git。
 
-## Python 介面
+| 模組 | 用途 |
+|---|---|
+| `model`、`wall`、`hand` | 牌與狀態資料、牌牆、胡牌及聽牌分析 |
+| `engine` | 合法操作、回應裁決與狀態轉移 |
+| `scoring`、`records` | 計台結算、紀錄保存與驗證 |
+| `simulation`、`policies` | 模擬、重播與電腦策略 |
+| `playback`、`board`、`__main__` | 終端機操作、盤面與 CLI |
 
-```python
-from random import Random
-from tw_mahjong import (
-    BasicEfficiencyPolicy, create_game, simulate, replay,
-    record_to_json, record_from_json, score_hand, settle_hand,
-)
-
-initial = create_game(rng=Random(17))
-policies = tuple(BasicEfficiencyPolicy(Random(100 + player)) for player in range(4))
-result = simulate(initial, policies)
-print(result.final_state.end_reason.value)
-
-text = record_to_json(result)
-loaded = record_from_json(text)
-final_state = replay(loaded.initial_state, loaded.actions)
-print(final_state == result.final_state)
-print(score_hand(final_state))
-print(settle_hand(final_state, loaded.settlement_config))
+```bash
+# Check syntax and accidental whitespace changes.
+python -m compileall -q src
+git diff --check
 ```
-
-分析手牌時必須傳入實體牌，而不是只有牌種：
-
-```python
-from tw_mahjong import Tile, analyze_hand
-
-# 123萬、456萬、123筒、123索、東東東、中中。
-hand = tuple(Tile(i) for i in (
-    0, 4, 8, 12, 16, 20, 36, 40, 44, 72, 76, 80, 108, 109, 110, 124, 125,
-))
-analysis = analyze_hand(hand)
-print(analysis.winning)  # True
-print(analysis.decompositions)
-```
-
-有 m 組副露時，成胡分析的暗手必須有 `17 - 3*m` 張。長度錯誤、花牌或重複實體牌會拋出 `MahjongError`；合法但未成胡則回傳 `winning=False`。
-
-槓即使有四張牌也只算一組面子。`find_waits(hand, melds)` 接受 `16 - 3*m` 張暗手，回傳可胡牌種的排序 tuple；不估算他家暗手或河牌的剩餘牌數。
-
-```python
-from tw_mahjong import find_waits
-print(find_waits(hand[:-1]))  # (31,)：中
-```
-
-基本策略的結構分數可直接使用：
-
-```python
-from tw_mahjong import evaluate_structure
-print(evaluate_structure(hand[:-1]))  # 62：五個完整面子 60，加門清 2
-```
-
-此函式接受等效 16 張手牌。順子／刻子 12、對子 4、相鄰兩張 3、隔一張 2、孤張 0，每組既有面子 12，門清另加 2。採最佳不重複分組，因此同一張牌不會同時計入多個結構。結構分數不是胡牌台數。出牌最高分同分時由注入的亂數選擇；吃碰同分時先碰後吃，再依實體牌 id 排序。
-
-原本 `SimplePolicy` 保留不變，Python 的 `simulate` 仍由呼叫端明確傳入四個策略，不會自行換掉策略。新策略不寫入 JSON，既有 v1／v2 紀錄繼續依原操作重播。
-
-使用 `legal_actions(state, player)` 查詢，再以 `apply_action(state, action)` 取得 `Transition`（新狀態與事件）。資料為不可變物件，非法操作不會改變原狀態。`MahjongError.code` 是穩定錯誤碼，完整清單與優先序契約見 spec。
-
-`RESPONSE` 階段須讓出牌者以外的三人各回應一次，包括只能過牌的玩家。前兩次僅登記意向，第三次才裁決。玩家座次採 `0 → 1 → 2 → 3 → 0`，莊家可以是任一座次。
-
-加槓會進入 `ROB_KONG`，其他三人同樣各回應一次 HU 或 PASS，未裁決前原碰牌及加槓牌保留原位。搶槓成功才將牌移入 `robbed_tile`，不當作一般棄牌。暗槓不破門清；暗槓與加槓不能在吃碰後未摸牌時宣告。
-
-`iter_replay(initial_state, actions)` 先產生 index 0 的初態，再為每個操作產生 `ReplayFrame`，包含新狀態及事件。此介面不讀取鍵盤、不等待、不輸出畫面，可供其他呈現方式使用。
-
-`score_hand` 僅接受已結束的 v2 狀態，流局回傳零台。多種拆解及胡牌落點取最高台數，同分依 spec 排序。`settle_hand` 內部重算台數；自摸三家付款，放槍／搶槓只有來源者付款，每筆交易個別計算莊家加台，四家分數增減加總為零。
-
-```python
-from tw_mahjong import SettlementConfig
-print(settle_hand(final_state, SettlementConfig(base=100, tai_value=20)))
-```
-
-自訂結算參數若要保存於紀錄，傳入 `simulate(..., settlement_config=config)`。底分須為非負整數，每台分數須為正整數。v1 狀態不接受計分；新建牌局預設 v2，需要原規則時可指定 `create_game(..., rules_version=1)`。
-
-自訂策略為 `policy(state, player) -> Action`；`simulate` 接受四個策略的 tuple。策略可讀取完整狀態，因此適合規則實驗，未實作多人連線所需的資訊隔離。
-
-## 元件與實作方式
-
-| 元件 | 位置 | 說明 |
-|---|---|---|
-| 牌與公開資料 | [model.py](src/tw_mahjong/model.py) | 以實體 id 區分同種牌，使用不可變資料 |
-| 牌牆 | [wall.py](src/tw_mahjong/wall.py) | 前端摸牌、後端補花，回傳新的牌牆 |
-| 胡牌分析 | [hand.py](src/tw_mahjong/hand.py) | 枚舉將眼，對最小剩餘牌回溯拆解刻子與順子，快取子問題並去重排序 |
-| 規則與流程 | [engine.py](src/tw_mahjong/engine.py) | 驗證牌張守恆、列舉合法動作、純函式狀態轉移與延後裁決 |
-| 模擬與重播 | [simulation.py](src/tw_mahjong/simulation.py) | 注入策略與亂數，重播既有操作 |
-| JSON 紀錄 | [records.py](src/tw_mahjong/records.py) | 嚴格格式檢查與重播核對 |
-| 計台與結算 | [scoring.py](src/tw_mahjong/scoring.py) | 枚舉胡牌落點、選最高台、逐付款方結算 |
-| 終端機播放器 | [playback.py](src/tw_mahjong/playback.py) | 呈現逐步快照、處理按鍵與顯示速度 |
-| 牌塊盤面 | [board.py](src/tw_mahjong/board.py) | 中文／ASCII 牌塊、欄寬排版與四家分區 |
-| 基本電腦策略 | [policies.py](src/tw_mahjong/policies.py) | 不重複結構分組評分與吃碰／出牌選擇 |
-
-## 開發與交付
-
-Python 僅支援 **3.10.x**；`.python-version` 與套件 metadata 均有指定。執行期無第三方相依套件，建置時使用 setuptools。
-
-```powershell
-.venv\Scripts\python --version
-.venv\Scripts\python -m compileall -q src
-git status --short --branch
-```
-
-本專案不附測試程式，供外部工具根據 [SPEC.md](SPEC.md) 產生測試。開發時以規格核對、程式審查、編譯檢查及直接執行代表性牌型與牌局確認行為。
-
-Git 提交順序為規格與環境、牌模型與牌牆、胡牌分析、初始化與狀態機、模擬與紀錄、最終文件與核對。虛擬環境、下載的直譯器、快取及建置產物不納入版本控制。
-
-第二階段先提交規格，再提交逐步重播與播放器；槓、計台與 v2 紀錄因共用資料契約一併提交，最後補齊文件與核對。
-
-0.3 階段依序提交規格、PASS 播放過濾、牌塊與四家分區、基本策略及整合文件；沒有改動規則引擎或紀錄格式。
