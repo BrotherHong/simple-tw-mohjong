@@ -1,0 +1,15 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Hand requires ordinary physical tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Hand requires ordinary physical tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected at most five melds')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected Meld values')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Duplicate physical tile across hand and melds')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected at most five melds')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Wrong concealed tile count for meld count')]
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution

@@ -1,0 +1,3 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('BasicEfficiencyPolicy requires random.Random')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Hand requires ordinary physical tiles')]
+Experienced timeout from test-case execution

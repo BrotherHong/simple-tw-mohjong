@@ -1,0 +1,7 @@
+[00:20:19] INFO     Starting Pynguin client with master-worker     client.py:40
+                    architecture                                               
+[00:21:52] INFO     Received result for task                      master.py:133
+                    test_gen_1792340419.9280365:                               
+                    WorkerReturnCode.OK                                        
+           INFO     Stopping master-worker system                  client.py:44
+           INFO     Master-worker system stopped                   client.py:46

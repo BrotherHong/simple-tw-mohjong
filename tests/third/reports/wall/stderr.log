@@ -1,0 +1,6 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Cannot draw from empty wall')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Wall requires a tuple of tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Cannot draw from empty wall')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Wall requires a tuple of tiles')]
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
