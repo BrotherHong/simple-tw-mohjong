@@ -104,6 +104,8 @@ python -m tw_mahjong watch output/game.json --speed 2
 
 建議使用至少 120 欄的終端機，顯示兩欄四家盤面；較窄時改為直列。互動畫面河牌顯示最近 12 張，`*` 標記剛摸入或打出的牌。Windows 已實際驗證，macOS／Linux 尚未實機驗證。
 
+筒牌與花牌採亮藍、亮紫色，方便在深色背景辨識；每組副露獨立條列，純文字模式也會逐組分行。
+
 ```bash
 # Export the complete action log without terminal controls.
 python -m tw_mahjong watch output/game.json --plain --detail > output/transcript.txt

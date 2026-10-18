@@ -209,8 +209,12 @@ def render_frame(
             f"P{player} {'ESWN'[wind]}{' [dealer]' if player == state.dealer else ''} "
             f"| hand: {_tiles(own.hand)}"
         )
-        melds = " / ".join(f"{meld.kind.value}[{_tiles(meld.tiles)}]" for meld in own.melds) or "-"
-        lines.append(f"  melds: {melds} | flowers: {_tiles(own.flowers)}")
+        lines.append("  melds:" if own.melds else "  melds: -")
+        lines.extend(
+            f"    - {meld.kind.value} [{_tiles(meld.tiles)}]"
+            for meld in own.melds
+        )
+        lines.append(f"  flowers: {_tiles(own.flowers)}")
         lines.append(f"  river: {_tiles(state.discards[player])}")
 
     lines.append("Recent events:")

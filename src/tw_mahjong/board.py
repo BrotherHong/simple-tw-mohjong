@@ -136,7 +136,8 @@ def tile_block(
 
     block = "[" + _pad(label, 4) + "]"
     if color:
-        palette = (31, 34, 32, 33, 35)
+        # Bright blue and magenta stay readable on dark terminal backgrounds.
+        palette = (31, 94, 32, 33, 95)
         group = tile.kind // 9 if tile.kind < 27 else 3 if tile.kind < 34 else 4
         block = f"\x1b[{'1;' if marked else ''}{palette[group]}m{block}\x1b[0m"
 
@@ -233,14 +234,19 @@ def _panel(
         inner,
     ))
 
-    meld_tokens = []
-    for meld in own.melds:
-        name = meld.kind.value if ascii_tiles else _ACTIONS[meld.kind.value]
-        meld_tokens.extend((name + "{",) + blocks(meld.tiles) + ("}",))
     rows.extend(_wrap_tokens(
-        ("Melds:" if ascii_tiles else "副露:",) + tuple(meld_tokens or ("-",)),
+        ("Melds:" if ascii_tiles else "副露:",) + (() if own.melds else ("-",)),
         inner,
     ))
+
+    # Start each meld on its own row, even when several would fit together.
+    for meld in own.melds:
+        name = meld.kind.value if ascii_tiles else _ACTIONS[meld.kind.value]
+        rows.extend(_wrap_tokens(
+            ("-", name, "{") + blocks(meld.tiles) + ("}",),
+            inner,
+        ))
+
     rows.extend(_wrap_tokens(
         ("Flowers:" if ascii_tiles else "花牌:",) + (blocks(own.flowers) or ("-",)),
         inner,
