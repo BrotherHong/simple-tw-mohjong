@@ -6,7 +6,7 @@ $env:PYNGUIN_DANGER_AWARE = "1"
 
 $projectRoot = $PSScriptRoot
 $python = Join-Path $projectRoot ".venv\Scripts\python.exe"
-$runDir = "tests/run_$(Get-Date -Format 'yyyyMMdd_HHmmss_fff')"
+$runDir = "tests/second"
 $timer = [Diagnostics.Stopwatch]::StartNew()
 $process = $null
 
@@ -40,7 +40,7 @@ try {
             "--maximum-test-execution-timeout", "5",
             "--maximum-module-execution-timeout", "5",
             "--subprocess", "True",
-            "--seed", "17",
+            "--seed", "42",
             "-v"
         )
 

@@ -1,0 +1,11 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected GameState with a Wall')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected SimulationResult')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Unsupported record version')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected JSON text')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expecting value: line 1 column 1 (char 0)')]
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution

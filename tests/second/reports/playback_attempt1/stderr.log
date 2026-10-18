@@ -1,0 +1,6 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('--step requires an interactive terminal without --plain')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Speed must be finite and between 0.25 and 64')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Speed must be finite and between 0.25 and 64')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Speed must be finite and between 0.25 and 64')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Speed must be finite and between 0.25 and 64')]
+Experienced timeout from test-case execution

@@ -1,0 +1,4 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected GameState with a Wall')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected SettlementConfig')]
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
