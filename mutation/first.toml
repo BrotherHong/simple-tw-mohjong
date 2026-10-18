@@ -5,7 +5,7 @@ excluded-modules = [
     "src/tw_mahjong/__init__.py",
     "src/tw_mahjong/__main__.py",
 ]
-test-command = "python -B -m pytest -x -q tests/first -p no:cacheprovider"
+test-command = ".venv/Scripts/python.exe -B -m pytest -x -q tests/first -p no:cacheprovider"
 
 [cosmic-ray.distributor]
 name = "local"

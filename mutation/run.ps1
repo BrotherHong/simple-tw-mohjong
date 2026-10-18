@@ -1,4 +1,4 @@
-#Requires -Version 7.0
+#Requires -Version 5.1
 param(
     [Parameter(Mandatory)][ValidateSet('first', 'second', 'third')][string] $Run,
     [string] $Mutants = 'mutation/all-mutants.sqlite',
