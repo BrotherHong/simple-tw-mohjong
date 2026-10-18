@@ -1,0 +1,11 @@
+[cosmic-ray]
+module-path = "src/tw_mahjong"
+timeout = 120.0
+excluded-modules = [
+    "src/tw_mahjong/__init__.py",
+    "src/tw_mahjong/__main__.py",
+]
+test-command = "python -B -m pytest -x -q tests/second -p no:cacheprovider"
+
+[cosmic-ray.distributor]
+name = "local"

@@ -11,3 +11,14 @@ output/
 htmlcov/
 .pytest_cache/
 .ruff_cache/
+
+# SQLite runtime files.
+mutation/**/*.sqlite-journal
+mutation/**/*.sqlite-wal
+mutation/**/*.sqlite-shm
+tests/**/reports/mutation/*.sqlite-journal
+tests/**/reports/mutation/*.sqlite-wal
+tests/**/reports/mutation/*.sqlite-shm
+
+# Rebuildable mutation reports.
+tests/**/reports/mutation/*.html
