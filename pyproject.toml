@@ -15,3 +15,9 @@ tw-mahjong = "tw_mahjong.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.coverage.run]
+omit = [
+    "src/tw_mahjong/__init__.py",
+    "src/tw_mahjong/__main__.py",
+]

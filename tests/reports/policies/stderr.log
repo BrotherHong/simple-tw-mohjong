@@ -1,0 +1,2 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('BasicEfficiencyPolicy requires random.Random')]
+Experienced timeout from test-case execution

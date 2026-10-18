@@ -1,0 +1,31 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Tile id must be an integer from 0 to 143')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Player must be an integer from 0 to 3')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Player must be an integer from 0 to 3')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Unknown tile code')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Unknown tile code')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('A meld needs three or four ordinary physical tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Player must be an integer from 0 to 3')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Tile id must be an integer from 0 to 143')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Base must be nonnegative and tai_value positive integers')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Base must be nonnegative and tai_value positive integers')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Base must be nonnegative and tai_value positive integers')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Tile id must be an integer from 0 to 143')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('A meld needs three or four ordinary physical tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Base must be nonnegative and tai_value positive integers')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('A meld needs three or four ordinary physical tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('A meld needs three or four ordinary physical tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Tile id must be an integer from 0 to 143')]
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution

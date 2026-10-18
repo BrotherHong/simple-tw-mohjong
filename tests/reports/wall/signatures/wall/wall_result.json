@@ -1,0 +1,1 @@
+[{"file": "wall.py", "line_number": 14, "type": ["None"], "col_offset": 5, "function": "Wall.__post_init__"}, {"file": "wall.py", "line_number": 29, "type": ["tuple"], "col_offset": 5, "function": "Wall.draw_back"}, {"file": "wall.py", "line_number": 22, "type": ["tuple"], "col_offset": 5, "function": "Wall.draw_front"}]

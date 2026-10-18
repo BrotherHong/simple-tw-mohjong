@@ -1,0 +1,23 @@
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Invalid rule version or round wind')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Invalid rule version or round wind')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected GameState with a Wall')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected GameState with a Wall')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Initialization requires all 144 tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected random.Random')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Wall requires a tuple of tiles')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Provide exactly one of tile_order and rng')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Invalid rule version or round wind')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Provide exactly one of tile_order and rng')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Invalid rule version or round wind')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Invalid rule version or round wind')]
+Unpicklable exceptions, final results might differ from classic execution with same seed: [MahjongError('Expected GameState with a Wall')]
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
+Experienced timeout from test-case execution
