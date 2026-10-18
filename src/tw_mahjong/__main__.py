@@ -23,15 +23,19 @@ def _summary(result: SimulationResult) -> dict[str, object]:
     return {
         "phase": state.phase.value,
         "end_reason": None if state.end_reason is None else state.end_reason.value,
-        "winner": state.winner, "win_source": state.win_source,
+        "winner": state.winner,
+        "win_source": state.win_source,
         "winning_tile": state.winning_tile,
-        "actions": len(result.actions), "remaining_tiles": len(state.wall.tiles),
+        "actions": len(result.actions),
+        "remaining_tiles": len(state.wall.tiles),
     }
 
 
 def main(argv: Optional[list[str]] = None) -> int:
+    """Parse a command, run it, and report user-facing errors consistently."""
     parser = argparse.ArgumentParser(description="Simplified Taiwanese 16-tile mahjong")
     commands = parser.add_subparsers(dest="command", required=True)
+
     run = commands.add_parser("simulate", help="Run four computer policies")
     run.add_argument("--seed", type=int, required=True)
     run.add_argument("--dealer", type=int, choices=range(4), default=0)
@@ -40,8 +44,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     run.add_argument("--tai-value", type=int, default=20, help="Positive points per tai")
     run.add_argument("--round-wind", choices=("E", "S", "W", "N"), default="E")
     run.add_argument("--policy", choices=("basic", "simple"), default="basic")
+
     load = commands.add_parser("replay", help="Validate and replay a JSON record")
     load.add_argument("path", type=Path)
+
     viewer = commands.add_parser("watch", help="Watch a verified record in the terminal")
     viewer.add_argument("path", type=Path)
     viewer.add_argument("--speed", type=float, default=2)
@@ -51,28 +57,49 @@ def main(argv: Optional[list[str]] = None) -> int:
     viewer.add_argument("--ascii", action="store_true", help="Use ASCII tile codes and English labels")
     viewer.add_argument("--no-color", action="store_true", help="Disable tile colors")
     args = parser.parse_args(argv)
+
+    # Reject unsupported playback settings before loading the record.
     if args.command == "watch":
         if not math.isfinite(args.speed) or not 0.25 <= args.speed <= 64:
             parser.error("--speed must be finite and between 0.25 and 64")
         if args.step and (args.plain or not sys.stdin.isatty() or not sys.stdout.isatty()):
             parser.error("--step requires an interactive terminal without --plain")
+
     try:
         if args.command == "simulate":
             config = SettlementConfig(args.base, args.tai_value)
-            initial = create_game(dealer=args.dealer, rng=random.Random(args.seed), round_wind=tile_kind(args.round_wind))
+            initial = create_game(
+                dealer=args.dealer,
+                rng=random.Random(args.seed),
+                round_wind=tile_kind(args.round_wind),
+            )
             policy = BasicEfficiencyPolicy if args.policy == "basic" else SimplePolicy
-            policies = tuple(policy(random.Random(args.seed * 4 + player + 1)) for player in range(4))
+            policies = tuple(
+                policy(random.Random(args.seed * 4 + player + 1))
+                for player in range(4)
+            )
             result = simulate(initial, policies, settlement_config=config)
+
+            # Exclusive creation protects existing records from accidental overwrite.
             if args.output is not None:
                 text = record_to_json(result)
                 with args.output.open("x", encoding="utf-8", newline="\n") as stream:
                     stream.write(text + "\n")
         else:
             result = record_from_json(args.path.read_text(encoding="utf-8"))
+
         if args.command == "watch":
-            watch(result, speed=args.speed, step=args.step, plain=args.plain, detail=args.detail,
-                  ascii_tiles=args.ascii, no_color=args.no_color)
+            watch(
+                result,
+                speed=args.speed,
+                step=args.step,
+                plain=args.plain,
+                detail=args.detail,
+                ascii_tiles=args.ascii,
+                no_color=args.no_color,
+            )
             return 0
+
         print(json.dumps(_summary(result), ensure_ascii=False, sort_keys=True))
         return 0
     except (MahjongError, OSError, UnicodeError) as exc:
