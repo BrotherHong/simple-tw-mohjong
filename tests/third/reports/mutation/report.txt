@@ -1,0 +1,1455 @@
+﻿[job-id] 50479d3182754ca8ba21cdf2ca543577
+src\tw_mahjong\board.py core/AddNot 12
+worker outcome: normal, test outcome: killed
+[job-id] 671571f2de18488c832f53ce514d5df4
+src\tw_mahjong\board.py core/AddNot 17
+worker outcome: normal, test outcome: killed
+[job-id] 547b6f6129924079984afaffc12ee90b
+src\tw_mahjong\board.py core/AddNot 2
+worker outcome: normal, test outcome: killed
+[job-id] 260e60fbf39544a9ad1a497ac39da1a0
+src\tw_mahjong\board.py core/AddNot 23
+worker outcome: normal, test outcome: killed
+[job-id] 5a4dd282357643a4bd6c44a1e0fcb550
+src\tw_mahjong\board.py core/NumberReplacer 20
+worker outcome: normal, test outcome: killed
+[job-id] 4653b30687c44100a386b61678998046
+src\tw_mahjong\board.py core/NumberReplacer 33
+worker outcome: normal, test outcome: killed
+[job-id] 1b4cea236a04495b8c4fe1332152c920
+src\tw_mahjong\board.py core/NumberReplacer 74
+worker outcome: normal, test outcome: killed
+[job-id] 469ed3a17f7a466290e867fe02254b40
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_BitAnd 3
+worker outcome: normal, test outcome: killed
+[job-id] 75b886fd9b7148f191a5944ed8975c17
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_BitAnd 7
+worker outcome: normal, test outcome: killed
+[job-id] 10f0114f83c84e62a5ea9455a49a3da0
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_BitOr 27
+worker outcome: normal, test outcome: killed
+[job-id] c65e5c3848914db58ee08da679ba924b
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_BitXor 5
+worker outcome: normal, test outcome: killed
+[job-id] 0f11953d79a042b2980af6918cf9c848
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_BitXor 7
+worker outcome: normal, test outcome: killed
+[job-id] b70c960efa1743059df212ad6d024817
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_Div 10
+worker outcome: normal, test outcome: killed
+[job-id] 72fd859292c54cad87626d4126fb84ca
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_Div 28
+worker outcome: normal, test outcome: killed
+[job-id] ce79383ac8da469093d824903d623a55
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_Div 5
+worker outcome: normal, test outcome: killed
+[job-id] 05fc9dcc017546fa911d81551ff4b9fa
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_FloorDiv 13
+worker outcome: normal, test outcome: killed
+[job-id] 0371e7d949d54dc487db7c872cc07ccc
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_FloorDiv 28
+worker outcome: normal, test outcome: killed
+[job-id] 8bb5fdd1403a4dbf9f4a52299f66f002
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_LShift 16
+worker outcome: normal, test outcome: killed
+[job-id] b5d0f3578166460a9906483bb71405df
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_Mod 20
+worker outcome: normal, test outcome: killed
+[job-id] f71ff8095c8f491eb39e17e1b4e98338
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_Pow 19
+worker outcome: normal, test outcome: killed
+[job-id] 135334d41d0f4d7c84e89976c144c759
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_Pow 27
+worker outcome: normal, test outcome: killed
+[job-id] dd415adf4d4e4a41878640343006596c
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_RShift 1
+worker outcome: normal, test outcome: killed
+[job-id] 7840ce6d535b477ca654852156790b30
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_RShift 16
+worker outcome: normal, test outcome: killed
+[job-id] a0de5387f1474c3fadf14b032f7840bc
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_RShift 20
+worker outcome: normal, test outcome: killed
+[job-id] 352065a3fe8b43d7a29afb95b513abaa
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_RShift 22
+worker outcome: normal, test outcome: killed
+[job-id] 804720e5fd674777ad60d24bc485fdf4
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_RShift 23
+worker outcome: normal, test outcome: killed
+[job-id] c4eab1d5b3a24896a5523deaafc41085
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Add_Sub 14
+worker outcome: normal, test outcome: killed
+[job-id] 2d89ab0733ec4f6b8cd2d8444bba36cd
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_FloorDiv_Div 1
+worker outcome: normal, test outcome: killed
+[job-id] 2caa7674d18d42428ed8e0e7b313c8e8
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_FloorDiv_Pow 1
+worker outcome: normal, test outcome: killed
+[job-id] ec16daaf338f419a9a1a11985cd3c789
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Mod_Pow 1
+worker outcome: normal, test outcome: killed
+[job-id] ec2abd93a94b472da7601f7428e24bd3
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Mul_Add 4
+worker outcome: normal, test outcome: killed
+[job-id] fe22d2d20c7b4588b06bc9b2c9a5a8b1
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Mul_BitAnd 1
+worker outcome: normal, test outcome: killed
+[job-id] 82f80c7fa0044015be0ed648996dd54e
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Mul_Div 4
+worker outcome: normal, test outcome: killed
+[job-id] 3f138cb126e9430ba06cf8fa2fdcc6fc
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Mul_FloorDiv 1
+worker outcome: normal, test outcome: killed
+[job-id] 3d52b4ebb6bb4a7baf2ff8355acc46e0
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Mul_FloorDiv 4
+worker outcome: normal, test outcome: killed
+[job-id] 8e13a7ad415b41cfaef2e7a517bc8659
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Mul_Sub 4
+worker outcome: normal, test outcome: killed
+[job-id] 4c78b636ed8d4ba0bc390ccf90a77e5a
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Pow_Mul 1
+worker outcome: normal, test outcome: killed
+[job-id] 3ca9c07c285b4ea3b28f890f609f8019
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Pow_Sub 1
+worker outcome: normal, test outcome: killed
+[job-id] f6d17104c10040b8b03cb1c2672a841b
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Sub_FloorDiv 5
+worker outcome: normal, test outcome: killed
+[job-id] 26343a2ebda44b808c11120d9a833e65
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Sub_LShift 4
+worker outcome: normal, test outcome: killed
+[job-id] 50ea3f15aebc4b06834a5213ee7eb484
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Sub_LShift 6
+worker outcome: normal, test outcome: killed
+[job-id] 141ec1450e3442ac84b067e8d8ff2323
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Sub_Mod 8
+worker outcome: normal, test outcome: killed
+[job-id] 8f41621ca208465d812aaf37c24c3e8a
+src\tw_mahjong\board.py core/ReplaceBinaryOperator_Sub_RShift 3
+worker outcome: normal, test outcome: killed
+[job-id] 555998e7fde04210a2473d2629187795
+src\tw_mahjong\board.py core/ReplaceComparisonOperator_Gt_Is 1
+worker outcome: normal, test outcome: killed
+[job-id] 1a765bf0aa984ceb96c4e0b5e1a93e55
+src\tw_mahjong\board.py core/ReplaceComparisonOperator_Gt_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] 70642b23ff624f6199c5cd64dcd3feb4
+src\tw_mahjong\board.py core/ReplaceComparisonOperator_IsNot_Is 4
+worker outcome: normal, test outcome: killed
+[job-id] 98877d19913744d8b9607a913924b236
+src\tw_mahjong\board.py core/ReplaceComparisonOperator_IsNot_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] 2848ffe7b31b4ad98958402dd6debba5
+src\tw_mahjong\board.py core/ReplaceComparisonOperator_Is_Eq 3
+worker outcome: normal, test outcome: survived
+[job-id] 8cea594226c940ada4d3a2b809e2ec8c
+src\tw_mahjong\board.py core/ReplaceComparisonOperator_Is_GtE 4
+worker outcome: normal, test outcome: killed
+[job-id] feb2ffadac9b4d6196775cc8e47409f6
+src\tw_mahjong\board.py core/ReplaceComparisonOperator_Is_Lt 2
+worker outcome: normal, test outcome: killed
+[job-id] 1f45b6d2d7624aab9d5a609c18b6e545
+src\tw_mahjong\engine.py core/AddNot 72
+worker outcome: normal, test outcome: killed
+[job-id] 26a7c788e5fb4798a23212d2515521a2
+src\tw_mahjong\engine.py core/NumberReplacer 0
+worker outcome: normal, test outcome: survived
+[job-id] 7c4a0e4ef1fe4bdaaa4e36148f64250a
+src\tw_mahjong\engine.py core/NumberReplacer 10
+worker outcome: normal, test outcome: survived
+[job-id] faf4e23a7234413f995657ea81e6c2db
+src\tw_mahjong\engine.py core/NumberReplacer 112
+worker outcome: normal, test outcome: killed
+[job-id] 5bc4ec21ac044b1280620c34bfce08cc
+src\tw_mahjong\engine.py core/NumberReplacer 144
+worker outcome: normal, test outcome: killed
+[job-id] ad3f0175d5844f7f8aa9eb627b103ab7
+src\tw_mahjong\engine.py core/NumberReplacer 153
+worker outcome: normal, test outcome: survived
+[job-id] aeb9948f914448519cfe016908d4b6e0
+src\tw_mahjong\engine.py core/NumberReplacer 173
+worker outcome: normal, test outcome: killed
+[job-id] 02f3e0a103004858a6a735e8aa4c50cc
+src\tw_mahjong\engine.py core/NumberReplacer 189
+worker outcome: normal, test outcome: survived
+[job-id] ea5e3e2dc03245d1bd1915b86db7cdcd
+src\tw_mahjong\engine.py core/NumberReplacer 23
+worker outcome: normal, test outcome: survived
+[job-id] b72e5c5617c44944b66404c3e5e294c2
+src\tw_mahjong\engine.py core/NumberReplacer 38
+worker outcome: normal, test outcome: killed
+[job-id] 8fe3cb629b8d426c9dd02a293d6a7a93
+src\tw_mahjong\engine.py core/NumberReplacer 7
+worker outcome: normal, test outcome: killed
+[job-id] 00897a53549c4a6fa2e420c739af10f7
+src\tw_mahjong\engine.py core/NumberReplacer 73
+worker outcome: normal, test outcome: killed
+[job-id] 4a42c54173844f9088967dc3d710c8d4
+src\tw_mahjong\engine.py core/ReplaceAndWithOr 25
+worker outcome: normal, test outcome: killed
+[job-id] 67b229ac591f4ce9b399098dd7f5b1b6
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Add_BitAnd 3
+worker outcome: normal, test outcome: killed
+[job-id] c9a01515ab054c6cad77c3de63c3a778
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Add_Div 13
+worker outcome: normal, test outcome: killed
+[job-id] 187fef88c52f458080dd316a0068eae4
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Add_FloorDiv 4
+worker outcome: normal, test outcome: killed
+[job-id] 5b45f2eab0ca457ca8bd839e57589225
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Add_Mul 7
+worker outcome: normal, test outcome: killed
+[job-id] 24732f1a0b9043419f5553fe283bee62
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Add_Sub 17
+worker outcome: normal, test outcome: killed
+[job-id] 803aba2f9ece40ccb5112387548f9206
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Add_Sub 2
+worker outcome: normal, test outcome: killed
+[job-id] c50c650f4c8144a08b423dcff130e85b
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Add_Sub 4
+worker outcome: normal, test outcome: killed
+[job-id] ebddd1120a63428f9b9ce04c8fc35fc1
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Mul_Pow 2
+worker outcome: normal, test outcome: killed
+[job-id] 19615365519b45abb9d3275b4c4b4b67
+src\tw_mahjong\engine.py core/ReplaceBinaryOperator_Sub_BitOr 0
+worker outcome: normal, test outcome: killed
+[job-id] 3d6fb5a44599430a99064efa267008bc
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Eq_Gt 14
+worker outcome: normal, test outcome: killed
+[job-id] 8e1f067d48d64bf59a89d65b596e8f03
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Eq_Gt 20
+worker outcome: normal, test outcome: killed
+[job-id] 3203f37538a243499961fb1ea922e684
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Eq_GtE 25
+worker outcome: normal, test outcome: killed
+[job-id] 53fb6a7817484567b6827362baed08de
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Eq_GtE 4
+worker outcome: normal, test outcome: killed
+[job-id] 1382072268434c11b277aa00aea17ef7
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Eq_IsNot 15
+worker outcome: normal, test outcome: killed
+[job-id] c50c77386a4e4c7a981e75c339f6ce73
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Eq_LtE 9
+worker outcome: normal, test outcome: survived
+[job-id] b13c2263a106460ead73d3dfbae37030
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_IsNot_GtE 6
+worker outcome: normal, test outcome: killed
+[job-id] bef614421d424bb6bdd5bd4545bf4c31
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_IsNot_LtE 1
+worker outcome: normal, test outcome: killed
+[job-id] fb33ee631b1e4657861b70e30e3f616a
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_GtE 10
+worker outcome: normal, test outcome: killed
+[job-id] 2aae40969c9149d6a711cb488e357897
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_GtE 24
+worker outcome: normal, test outcome: killed
+[job-id] ecab31c11b314192849f8c8760c54972
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_IsNot 27
+worker outcome: normal, test outcome: killed
+[job-id] cbecd6cbb5ea4d648170754ae5e9eb26
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_IsNot 28
+worker outcome: normal, test outcome: killed
+[job-id] d6b80cfc9aab49189a11ee5ce70576f5
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_IsNot 4
+worker outcome: normal, test outcome: killed
+[job-id] b39be1c6f49e4dc28ac8b246828b7d3b
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_Lt 7
+worker outcome: normal, test outcome: killed
+[job-id] 1fb48feb3d8f4405bcb1998389637ca7
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_LtE 20
+worker outcome: normal, test outcome: killed
+[job-id] e193b80528a247aaa2c7beee199e3113
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_LtE 26
+worker outcome: normal, test outcome: killed
+[job-id] 6af8d3bf7e33438b92cb587561f2fb0c
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Is_NotEq 3
+worker outcome: normal, test outcome: killed
+[job-id] 7f79d52ef5f54d75ac82d98e5724c163
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_LtE_Eq 5
+worker outcome: normal, test outcome: killed
+[job-id] 8597f2fa1da941298a869886ff277ec7
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_LtE_GtE 6
+worker outcome: normal, test outcome: survived
+[job-id] 6017fcda9fef466d8aa22400dca8331b
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_LtE_Lt 4
+worker outcome: normal, test outcome: killed
+[job-id] aa4028b8daab4b34a0bc4e8a46f783c1
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_LtE_Lt 5
+worker outcome: normal, test outcome: killed
+[job-id] 02bfb996495c48588f66caceeff1a93d
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_LtE_NotEq 1
+worker outcome: normal, test outcome: killed
+[job-id] e985258da753412da373299138e94117
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_Lt_NotEq 1
+worker outcome: normal, test outcome: survived
+[job-id] 4f54d0e4d5fe4a41b38fb621461a7198
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_NotEq_GtE 2
+worker outcome: normal, test outcome: killed
+[job-id] fb7d9d11c9cf4f3a9625d74e83908596
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_NotEq_IsNot 6
+worker outcome: normal, test outcome: survived
+[job-id] 35d3d25041ad4232b15d64b9fe2af99d
+src\tw_mahjong\engine.py core/ReplaceComparisonOperator_NotEq_Lt 10
+worker outcome: normal, test outcome: survived
+[job-id] 84450f0ef2e848b38a49abf75a5c84b3
+src\tw_mahjong\engine.py core/ReplaceOrWithAnd 16
+worker outcome: normal, test outcome: survived
+[job-id] 3b4bd11a0daf4459b44a0fd01cace193
+src\tw_mahjong\engine.py core/ReplaceUnaryOperator_Delete_USub 1
+worker outcome: normal, test outcome: killed
+[job-id] a40ae2071a114e6b9ca8ba07cf1be129
+src\tw_mahjong\hand.py core/AddNot 1
+worker outcome: normal, test outcome: killed
+[job-id] 558ac2b757ed4e159e10b53b6d76ca1e
+src\tw_mahjong\hand.py core/AddNot 3
+worker outcome: normal, test outcome: killed
+[job-id] 8f6e4f091032431797895662cc46d7ba
+src\tw_mahjong\hand.py core/NumberReplacer 10
+worker outcome: normal, test outcome: killed
+[job-id] 75415efecf6c4f78ae0b9d06e9d0d06d
+src\tw_mahjong\hand.py core/NumberReplacer 13
+worker outcome: normal, test outcome: survived
+[job-id] c1ba684052774342b3729e2b93782297
+src\tw_mahjong\hand.py core/NumberReplacer 16
+worker outcome: normal, test outcome: survived
+[job-id] eb9b7e088aeb4e078220a84b84a7fe04
+src\tw_mahjong\hand.py core/NumberReplacer 17
+worker outcome: normal, test outcome: killed
+[job-id] 37b9ce2c147a4b89acfe7f9c9ac928a2
+src\tw_mahjong\hand.py core/NumberReplacer 26
+worker outcome: normal, test outcome: killed
+[job-id] cb605e50ab3c459f89ef50e907b82b27
+src\tw_mahjong\hand.py core/NumberReplacer 30
+worker outcome: normal, test outcome: survived
+[job-id] 8a475aa50ee1457ba6bfd182c2087b67
+src\tw_mahjong\hand.py core/NumberReplacer 34
+worker outcome: normal, test outcome: killed
+[job-id] e2dcd93f67af4f8293fefdd48da7ccc2
+src\tw_mahjong\hand.py core/NumberReplacer 5
+worker outcome: normal, test outcome: killed
+[job-id] 04e8d1e2d0d44a5e826255cc3f5ed881
+src\tw_mahjong\hand.py core/NumberReplacer 7
+worker outcome: normal, test outcome: killed
+[job-id] 42e675590289411fa88522fd5da7ab01
+src\tw_mahjong\hand.py core/NumberReplacer 8
+worker outcome: normal, test outcome: killed
+[job-id] 26b320e60fef475483e332ca18617370
+src\tw_mahjong\hand.py core/ReplaceAndWithOr 3
+worker outcome: normal, test outcome: killed
+[job-id] 329faaaae6914e329d5304e113f1ff1a
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_BitAnd 0
+worker outcome: normal, test outcome: killed
+[job-id] 3df405bed2104cfaafc00c10bb4d0c26
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_BitAnd 4
+worker outcome: normal, test outcome: killed
+[job-id] 55f9d3d7e3814960b909d7d385b41277
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_BitXor 4
+worker outcome: normal, test outcome: killed
+[job-id] 7aeb414fa7eb4e9287264a398a277887
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_BitXor 5
+worker outcome: normal, test outcome: killed
+[job-id] 9a19ed411530418bb264899203cac544
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Div 1
+worker outcome: normal, test outcome: killed
+[job-id] a333908c204a4f8784154a41180e312c
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_FloorDiv 1
+worker outcome: normal, test outcome: killed
+[job-id] 34139b8e7e5144b59c945900dd01e5ae
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_FloorDiv 7
+worker outcome: normal, test outcome: killed
+[job-id] 45ddcd0540504922ab9af3675187edab
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Mul 1
+worker outcome: normal, test outcome: killed
+[job-id] 4fd5e5c7602847a3a2235b977017d1fc
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Mul 5
+worker outcome: normal, test outcome: killed
+[job-id] c2a6cb9ba27a4c24ae57746b925d96cf
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Mul 6
+worker outcome: normal, test outcome: killed
+[job-id] f995aaa0942946a1a55e30058213eb22
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Pow 2
+worker outcome: normal, test outcome: killed
+[job-id] ed010cd4e04c4531b6e74a2c7b53dc8a
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Pow 5
+worker outcome: normal, test outcome: killed
+[job-id] 2cc9d908c81a40bb8f48b6b3b23bc5c0
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Pow 7
+worker outcome: normal, test outcome: killed
+[job-id] 090c6836b2564790876bd931f1dcd84a
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Add_Sub 5
+worker outcome: normal, test outcome: killed
+[job-id] 054ca2db5f2b4d8da23fb08557d82bb8
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mod_FloorDiv 0
+worker outcome: normal, test outcome: killed
+[job-id] cd8d9d220479409ba5c9d9e91d7eb1a3
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mod_LShift 0
+worker outcome: normal, test outcome: killed
+[job-id] 90fd1e794f5e4a46ada5ef7f90587da8
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mul_BitAnd 1
+worker outcome: normal, test outcome: killed
+[job-id] 7311d1db2b2a41cbb9350f8396f495d7
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mul_Div 0
+worker outcome: normal, test outcome: killed
+[job-id] bb73c7cb883d42ecb39a716981be3eb4
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mul_LShift 0
+worker outcome: normal, test outcome: killed
+[job-id] 372dc9557a104d9395948a1b936fae23
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mul_Mod 1
+worker outcome: normal, test outcome: killed
+[job-id] 1b46038a19d544b8be7bfcaba590c044
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mul_Mod 3
+worker outcome: normal, test outcome: killed
+[job-id] b3996ca2e72e4d0ab9b29d71eedea07d
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mul_Pow 2
+worker outcome: normal, test outcome: killed
+[job-id] 4897540d12454046aa6802a71997f2ac
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Mul_RShift 1
+worker outcome: normal, test outcome: killed
+[job-id] 74810e63935c44018eb417c1e438a65c
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Sub_BitAnd 0
+worker outcome: normal, test outcome: killed
+[job-id] a6e39f1470d442569732ca2e9d32668e
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Sub_BitOr 0
+worker outcome: normal, test outcome: killed
+[job-id] e09858b5f04947ab83528d2d8de2afb8
+src\tw_mahjong\hand.py core/ReplaceBinaryOperator_Sub_BitXor 0
+worker outcome: normal, test outcome: killed
+[job-id] 403278c4a99f45b78e1e5aae9cea559e
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_GtE_Gt 1
+worker outcome: normal, test outcome: killed
+[job-id] e6544c6d8fe34283bb873a0d8557414f
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_Gt_NotEq 0
+worker outcome: normal, test outcome: killed
+[job-id] 5d74ea04d7c2490ebc817d577f82bf4d
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_IsNot_Is 0
+worker outcome: normal, test outcome: killed
+[job-id] 6d89a7d8dd2342a1bad6d51593e236ff
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_Lt_LtE 0
+worker outcome: normal, test outcome: killed
+[job-id] 6a964c7c47844e23b12cdcc2a37061e0
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_NotEq_Eq 1
+worker outcome: normal, test outcome: killed
+[job-id] ec9912e3598d4e64bd509d73402dd613
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_NotEq_GtE 0
+worker outcome: normal, test outcome: killed
+[job-id] bd2b2ff0715f47b892a42c20748628cd
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_NotEq_Is 1
+worker outcome: normal, test outcome: killed
+[job-id] 4eaa31f194b64e758042aa19c4fe830a
+src\tw_mahjong\hand.py core/ReplaceComparisonOperator_NotEq_IsNot 0
+worker outcome: normal, test outcome: survived
+[job-id] 9672fe02187b496ebb7be174b5a77a51
+src\tw_mahjong\hand.py core/ReplaceUnaryOperator_Delete_Not 1
+worker outcome: normal, test outcome: killed
+[job-id] 0aa970ebd74448f3ab249f7df77c3158
+src\tw_mahjong\hand.py core/ReplaceUnaryOperator_Delete_Not 2
+worker outcome: normal, test outcome: killed
+[job-id] 1429a0bc60904a60b7fb9c13d5fc5db8
+src\tw_mahjong\hand.py core/ZeroIterationForLoop 2
+worker outcome: normal, test outcome: killed
+[job-id] 86668edf01114892af0b7567bd99092f
+src\tw_mahjong\model.py core/AddNot 10
+worker outcome: normal, test outcome: killed
+[job-id] ed73bd70fa9e4e55a8a834edad47888d
+src\tw_mahjong\model.py core/AddNot 11
+worker outcome: normal, test outcome: killed
+[job-id] a82b605cddd041e7ab8eb4e4a0f4a9d8
+src\tw_mahjong\model.py core/NumberReplacer 12
+worker outcome: normal, test outcome: killed
+[job-id] 54d570218b9e4413ae82244e8f3053df
+src\tw_mahjong\model.py core/NumberReplacer 16
+worker outcome: normal, test outcome: killed
+[job-id] e9f1a9b6b10242469f741924d2cb09eb
+src\tw_mahjong\model.py core/NumberReplacer 17
+worker outcome: normal, test outcome: killed
+[job-id] 1a68d60b84cf4835b37cbbf5457efc96
+src\tw_mahjong\model.py core/NumberReplacer 2
+worker outcome: normal, test outcome: killed
+[job-id] 5882c528feec420d9dd9cbb94257bbd2
+src\tw_mahjong\model.py core/NumberReplacer 37
+worker outcome: normal, test outcome: survived
+[job-id] 66077da33b5843558972d0ba6a577eb4
+src\tw_mahjong\model.py core/NumberReplacer 55
+worker outcome: normal, test outcome: killed
+[job-id] 4b1da2144b704af990e1ecbf98aca9ab
+src\tw_mahjong\model.py core/NumberReplacer 57
+worker outcome: normal, test outcome: survived
+[job-id] f233c854d39f4254a17ae0f421c3e4f7
+src\tw_mahjong\model.py core/NumberReplacer 58
+worker outcome: normal, test outcome: killed
+[job-id] 5c3237f69bc94c46ac47ab2d86e4dd47
+src\tw_mahjong\model.py core/NumberReplacer 67
+worker outcome: normal, test outcome: survived
+[job-id] d6821fc9470c4ba5abb2604e44bffe18
+src\tw_mahjong\model.py core/RemoveDecorator 10
+worker outcome: normal, test outcome: killed
+[job-id] 8a0f0b23e81048d78a53548859c0350b
+src\tw_mahjong\model.py core/RemoveDecorator 11
+worker outcome: normal, test outcome: killed
+[job-id] bf72038208f1404492cf05a808e9ea34
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_Add_BitXor 1
+worker outcome: normal, test outcome: killed
+[job-id] aae4bad618b245edbc714808f1861275
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_Add_BitXor 3
+worker outcome: normal, test outcome: survived
+[job-id] 44205f0eedde419bad5ee23b9f4f5407
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_Add_RShift 0
+worker outcome: normal, test outcome: killed
+[job-id] a37dff4b1e7b4a04b1d1569358b1e27f
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_Add_Sub 0
+worker outcome: normal, test outcome: killed
+[job-id] 4f605bdadb97443f9e16116dd5e8fe07
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_BitAnd 0
+worker outcome: normal, test outcome: killed
+[job-id] 2a10ac8e120f47beb3f7353bf43ca76f
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_BitOr 1
+worker outcome: normal, test outcome: killed
+[job-id] d101db45a4624c6e8ab9b5b3e5e5fc9b
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_BitXor 1
+worker outcome: normal, test outcome: killed
+[job-id] 9852ae343c7a4248822c296705d277b4
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_Div 2
+worker outcome: normal, test outcome: killed
+[job-id] 0b34e938310044f982e3d6802b25e836
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_LShift 1
+worker outcome: normal, test outcome: survived
+[job-id] 29d30ee053604c2dab0d1f133e5ea19a
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_Mod 0
+worker outcome: normal, test outcome: killed
+[job-id] 995727740f1742879193cdab1126b172
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_Mul 2
+worker outcome: normal, test outcome: killed
+[job-id] 538256ab654e461db018d0926cabe5a3
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_Pow 2
+worker outcome: normal, test outcome: killed
+[job-id] 0a3ad5cdf08f42ae9e2e85fe1c18acc8
+src\tw_mahjong\model.py core/ReplaceBinaryOperator_FloorDiv_Sub 1
+worker outcome: normal, test outcome: killed
+[job-id] 1adc89c247d643199b63b2af986d92d7
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Eq_Lt 2
+worker outcome: normal, test outcome: killed
+[job-id] e40983d2275141a8b1b406b2552e4d1e
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Eq_LtE 3
+worker outcome: normal, test outcome: killed
+[job-id] 24150b09bf2a4fc3bb847fa4909dc4c6
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Is_Eq 1
+worker outcome: normal, test outcome: survived
+[job-id] 2ae989a9cf14436b85b871656f0832e6
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Is_GtE 0
+worker outcome: normal, test outcome: killed
+[job-id] 12ad2808cc774aa2bd0709f916a772d6
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_LtE_Eq 1
+worker outcome: normal, test outcome: killed
+[job-id] 1f57557f475f4166982a53cb68a2d96d
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_LtE_Eq 2
+worker outcome: normal, test outcome: survived
+[job-id] 5e6b93364ad84c8aa29576b8c758900d
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_LtE_Gt 3
+worker outcome: normal, test outcome: killed
+[job-id] 57a9aa1f4bef42d6a0af4b5dbe19312e
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_LtE_Gt 4
+worker outcome: normal, test outcome: killed
+[job-id] 7a531caee519451bba129f3bd0a18419
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_LtE_Is 3
+worker outcome: normal, test outcome: killed
+[job-id] 2f5d8acae85a4519b4f01529d6a392fc
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_LtE_Lt 3
+worker outcome: normal, test outcome: killed
+[job-id] f372a144e0864c4a88f7bd8d2030117c
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_LtE_NotEq 2
+worker outcome: normal, test outcome: killed
+[job-id] 32a0ced35a324678a53a28cdf1c3d344
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Lt_Gt 1
+worker outcome: normal, test outcome: killed
+[job-id] 266c51aa4a594d6eaca179fabf525ebd
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Lt_Gt 4
+worker outcome: normal, test outcome: killed
+[job-id] 61c942f121414723a913d60005c0939a
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Lt_GtE 0
+worker outcome: normal, test outcome: killed
+[job-id] fccda778ae2842a9b873dbddbb751fd5
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Lt_GtE 2
+worker outcome: normal, test outcome: killed
+[job-id] f7def4cab72f42f883b49d615c485b3b
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Lt_LtE 4
+worker outcome: normal, test outcome: killed
+[job-id] 5fab65bac78d4fcca221a7ef68b9b557
+src\tw_mahjong\model.py core/ReplaceComparisonOperator_Lt_NotEq 3
+worker outcome: normal, test outcome: survived
+[job-id] f95af8b079e04fa0ac4a7ffa13e93f9a
+src\tw_mahjong\model.py core/ReplaceTrueWithFalse 0
+worker outcome: normal, test outcome: killed
+[job-id] a88a5454c597461daa817e07525381ca
+src\tw_mahjong\model.py core/ReplaceTrueWithFalse 19
+worker outcome: normal, test outcome: survived
+[job-id] 72081528d0474e919428d1464391287a
+src\tw_mahjong\model.py core/ReplaceTrueWithFalse 2
+worker outcome: normal, test outcome: survived
+[job-id] fe9bbf5d59444b4382a5dee8df08ccf3
+src\tw_mahjong\model.py core/ReplaceTrueWithFalse 9
+worker outcome: normal, test outcome: survived
+[job-id] 9e0b9ce2774548c1a2dff48b92ca0757
+src\tw_mahjong\model.py core/ReplaceUnaryOperator_Delete_Not 10
+worker outcome: normal, test outcome: killed
+[job-id] 305ee5f4e49c436eab8cff93ab138b5a
+src\tw_mahjong\model.py core/ReplaceUnaryOperator_Delete_Not 3
+worker outcome: normal, test outcome: killed
+[job-id] ec005e31ecf3436996d9d9a5e61d60d9
+src\tw_mahjong\model.py core/ReplaceUnaryOperator_Delete_Not 5
+worker outcome: normal, test outcome: killed
+[job-id] 1788f782781d4c21bae8facfe131769a
+src\tw_mahjong\playback.py core/AddNot 13
+worker outcome: normal, test outcome: killed
+[job-id] a68a82db889944f5920ae5200e64b9bf
+src\tw_mahjong\playback.py core/AddNot 40
+worker outcome: normal, test outcome: killed
+[job-id] 8417802aea904b3e85a82c02251930cf
+src\tw_mahjong\playback.py core/ExceptionReplacer 1
+worker outcome: normal, test outcome: killed
+[job-id] 806a7e8247f64a698dbc70c7a6cccf2b
+src\tw_mahjong\playback.py core/NumberReplacer 20
+worker outcome: normal, test outcome: survived
+[job-id] ac9ad8c7451649c289fa4a279c470768
+src\tw_mahjong\playback.py core/NumberReplacer 28
+worker outcome: normal, test outcome: survived
+[job-id] af23d8c958b34ca898d5ee153c6cd040
+src\tw_mahjong\playback.py core/NumberReplacer 59
+worker outcome: normal, test outcome: killed
+[job-id] f926459f1b4d44bfa1bb03177c300cf5
+src\tw_mahjong\playback.py core/NumberReplacer 8
+worker outcome: normal, test outcome: killed
+[job-id] f34e7a37ce51468cb18c257bb9febdf2
+src\tw_mahjong\playback.py core/ReplaceAndWithOr 9
+worker outcome: normal, test outcome: killed
+[job-id] ef1749ba0e374ffc820368bfcb2b3c5d
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Add_BitAnd 4
+worker outcome: normal, test outcome: killed
+[job-id] 3c5e40a9a2fa4b5c99486462a4cd871e
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Add_LShift 6
+worker outcome: normal, test outcome: killed
+[job-id] ec6d847d17644f4ba1da844016e3437a
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Add_Mul 3
+worker outcome: normal, test outcome: survived
+[job-id] f0069caa766f489c93a3721252ecbcc9
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Add_Pow 5
+worker outcome: normal, test outcome: killed
+[job-id] 6941003359834c1a8d22fd729933c7c3
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_BitAnd_Div 0
+worker outcome: normal, test outcome: survived
+[job-id] 12fc48ca64a349e29ed9c877dccc630f
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_BitAnd_Pow 0
+worker outcome: normal, test outcome: killed
+[job-id] acb08e202c0243b9b72f4c75c6178efc
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Div_Add 2
+worker outcome: normal, test outcome: survived
+[job-id] 768604329b674044966e30da80563715
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Div_BitXor 3
+worker outcome: normal, test outcome: killed
+[job-id] 77c555b6c72a4834a4d165f6c49d1d28
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Div_FloorDiv 2
+worker outcome: normal, test outcome: survived
+[job-id] 6ad14733741c4c06b65c0ac2513480c0
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Div_LShift 3
+worker outcome: normal, test outcome: killed
+[job-id] ba66b865def34f3094e53d0f28265dd6
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Div_Mod 0
+worker outcome: normal, test outcome: survived
+[job-id] bbea9649280e4b7da6c48e0505df9dac
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Div_Mul 0
+worker outcome: normal, test outcome: survived
+[job-id] a7c8fb45d2a6409491acaf225ab7e28e
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Mul_BitXor 1
+worker outcome: normal, test outcome: killed
+[job-id] 8fb8356b26954accaca8d571aed9544b
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Mul_FloorDiv 0
+worker outcome: normal, test outcome: killed
+[job-id] eb80de8dc8d349bc9ebcc23e13950d25
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Mul_FloorDiv 1
+worker outcome: normal, test outcome: killed
+[job-id] 4e47288e05c548908bbdb14c0ccd67c0
+src\tw_mahjong\playback.py core/ReplaceBinaryOperator_Sub_Mod 2
+worker outcome: normal, test outcome: killed
+[job-id] c0dae4951ff049baa1a84cef0db92701
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Eq_Gt 9
+worker outcome: normal, test outcome: killed
+[job-id] ebb76d1116aa49efbb5be14c627a98f7
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Eq_GtE 9
+worker outcome: normal, test outcome: killed
+[job-id] 6cf26200790a4832af0b3a93322ddd72
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Eq_Is 0
+worker outcome: normal, test outcome: survived
+[job-id] 33bc9df9d1b94c35b9b9db2e65b4e7a3
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Eq_Lt 8
+worker outcome: normal, test outcome: killed
+[job-id] 57388cff18f94382ad2955449c869a83
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Eq_LtE 0
+worker outcome: normal, test outcome: survived
+[job-id] b35bb693df6d4baca0392a83a3575a63
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Eq_LtE 7
+worker outcome: normal, test outcome: survived
+[job-id] 29c7e889bbeb456cb2ae3a845b193b59
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Eq_NotEq 2
+worker outcome: normal, test outcome: killed
+[job-id] 35983eb85aeb411ca472b9cc9feb7626
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_GtE_Gt 0
+worker outcome: normal, test outcome: survived
+[job-id] 73eb7183871b4f07a090a2ecef7a4832
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_IsNot_Is 2
+worker outcome: normal, test outcome: killed
+[job-id] 089adb27017d42f3bdf110fbb19c955c
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_IsNot_Is 6
+worker outcome: normal, test outcome: killed
+[job-id] 3815476202e043579fb175c7cf2c2037
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Is_Gt 3
+worker outcome: normal, test outcome: killed
+[job-id] c935c9a738044890b00c29fd4c4ea7e7
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_Is_GtE 2
+worker outcome: normal, test outcome: killed
+[job-id] f25b26e786f647d8b6906c799c4c4cd8
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_LtE_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] 13a603b47a6f43df9b8d7ca2ec2a8c5b
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_NotEq_Eq 0
+worker outcome: normal, test outcome: survived
+[job-id] d410cfde10334b9ebf030fb870b43820
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_NotEq_IsNot 2
+worker outcome: normal, test outcome: survived
+[job-id] aece4ca955234198945ff571a2d0baa4
+src\tw_mahjong\playback.py core/ReplaceComparisonOperator_NotEq_LtE 1
+worker outcome: normal, test outcome: survived
+[job-id] 4b38d7a900cc4f6c97ebb260d4c863b3
+src\tw_mahjong\playback.py core/ReplaceFalseWithTrue 1
+worker outcome: normal, test outcome: killed
+[job-id] 385c7883e0364e67ba20637546ed115b
+src\tw_mahjong\playback.py core/ReplaceFalseWithTrue 11
+worker outcome: normal, test outcome: survived
+[job-id] 8b93971f22d74f82b2f001689d484ff6
+src\tw_mahjong\playback.py core/ReplaceFalseWithTrue 12
+worker outcome: normal, test outcome: killed
+[job-id] d965fabf62574ceba963a87aeb827097
+src\tw_mahjong\playback.py core/ReplaceFalseWithTrue 8
+worker outcome: normal, test outcome: survived
+[job-id] 7696df56dafd439abd257427d9be489f
+src\tw_mahjong\playback.py core/ReplaceFalseWithTrue 9
+worker outcome: normal, test outcome: survived
+[job-id] 2db2f37942bd4cba8c6a0e09f40203d5
+src\tw_mahjong\playback.py core/ReplaceTrueWithFalse 2
+worker outcome: normal, test outcome: survived
+[job-id] 59f15da1548c47c3972f82bd6e2dbbe4
+src\tw_mahjong\playback.py core/ReplaceTrueWithFalse 6
+worker outcome: normal, test outcome: killed
+[job-id] fe45d01656144926a0db6509bedd1435
+src\tw_mahjong\playback.py core/ReplaceTrueWithFalse 8
+worker outcome: normal, test outcome: survived
+[job-id] 86cd0f079f24425bbb9f40cf33babbae
+src\tw_mahjong\playback.py core/ReplaceUnaryOperator_Delete_Not 0
+worker outcome: normal, test outcome: killed
+[job-id] 02a78b6fa52145f4993f9ef701181121
+src\tw_mahjong\playback.py core/ZeroIterationForLoop 5
+worker outcome: normal, test outcome: killed
+[job-id] 59e657f21f914074bc57e3881d1ec882
+src\tw_mahjong\policies.py core/AddNot 10
+worker outcome: normal, test outcome: killed
+[job-id] 8d6e4b1cbc824259a73e6f66ad9747f7
+src\tw_mahjong\policies.py core/AddNot 11
+worker outcome: normal, test outcome: killed
+[job-id] b59d2b6025dd4fec800b3e73b7db4036
+src\tw_mahjong\policies.py core/AddNot 3
+worker outcome: normal, test outcome: killed
+[job-id] 8debfa7b18b24b4ab50354a646d799bc
+src\tw_mahjong\policies.py core/AddNot 6
+worker outcome: normal, test outcome: killed
+[job-id] 975d9cb7d6214aa7a1f4ee06e7cc52fa
+src\tw_mahjong\policies.py core/AddNot 8
+worker outcome: normal, test outcome: killed
+[job-id] 7364d0fa7a8f4b34a11cf2cc53f81e90
+src\tw_mahjong\policies.py core/NumberReplacer 24
+worker outcome: normal, test outcome: killed
+[job-id] 5d6380925c434b73ae398919dfa50873
+src\tw_mahjong\policies.py core/NumberReplacer 28
+worker outcome: normal, test outcome: killed
+[job-id] a2473421dbbf4dc29f981d3655dee8db
+src\tw_mahjong\policies.py core/NumberReplacer 37
+worker outcome: normal, test outcome: killed
+[job-id] 85c0a99546e9445e8ca38b60344f444e
+src\tw_mahjong\policies.py core/NumberReplacer 47
+worker outcome: normal, test outcome: killed
+[job-id] f8db4b9d6d2c4dc79cc3dec0981f70aa
+src\tw_mahjong\policies.py core/NumberReplacer 67
+worker outcome: normal, test outcome: killed
+[job-id] 47140435bf9a4b92ab03981558915df6
+src\tw_mahjong\policies.py core/NumberReplacer 70
+worker outcome: normal, test outcome: killed
+[job-id] 7951e621cfa64858a96deac491549943
+src\tw_mahjong\policies.py core/NumberReplacer 8
+worker outcome: normal, test outcome: killed
+[job-id] d87e34bc3e40418d946fff18d03b33de
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_BitAnd 4
+worker outcome: normal, test outcome: killed
+[job-id] 31f7e5c9442a49a9b4a6b0d37103bb3f
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_BitAnd 5
+worker outcome: normal, test outcome: killed
+[job-id] 8a98f0f27fa04078bbd3cc1e3e0a8208
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_BitAnd 8
+worker outcome: normal, test outcome: killed
+[job-id] 371e37fa37414328925b8bb590b2c701
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_BitOr 8
+worker outcome: normal, test outcome: killed
+[job-id] 1e83e1c20ae9489d9c9c5fd56a97cb1b
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Div 0
+worker outcome: normal, test outcome: killed
+[job-id] b411ae04769344a3b0aca57af8fd70e6
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Div 1
+worker outcome: normal, test outcome: killed
+[job-id] c9ad8b5164764dd3bba158ae7a1d5d99
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Div 11
+worker outcome: normal, test outcome: killed
+[job-id] e387fa680c1f4b02ae3c85fb2b7a14d0
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Div 2
+worker outcome: normal, test outcome: killed
+[job-id] cc155a588994465f995de721a602c2fc
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Div 5
+worker outcome: normal, test outcome: killed
+[job-id] 1e5c4f3bd25149f691794d2a7a903336
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_FloorDiv 4
+worker outcome: normal, test outcome: killed
+[job-id] 49585b79fe2e4f8f90d40e5317ff7add
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_FloorDiv 9
+worker outcome: normal, test outcome: killed
+[job-id] 7eeba833bd6e481e8e6c036d2b2fad84
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_LShift 2
+worker outcome: normal, test outcome: killed
+[job-id] 935c6224f6944f4fa00daca04c24da00
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_LShift 3
+worker outcome: normal, test outcome: killed
+[job-id] c886151ec7454d64b7896c1708881f37
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Mul 1
+worker outcome: normal, test outcome: killed
+[job-id] ce889640ac604a41b9398278859af735
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Mul 10
+worker outcome: normal, test outcome: killed
+[job-id] 93e7ca704f5d47f392406c162b160670
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Mul 13
+worker outcome: normal, test outcome: killed
+[job-id] 68256c17b7f9464cae9b2b61325d900e
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Mul 2
+worker outcome: normal, test outcome: killed
+[job-id] 28ac53e71da748b2ad9a6692ac5b0aee
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Pow 0
+worker outcome: normal, test outcome: killed
+[job-id] f492aaf05e574a1bb1ca5e5a9bcca59a
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Pow 12
+worker outcome: normal, test outcome: killed
+[job-id] 30ca786f1c314718a224e13840d78ebf
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_RShift 0
+worker outcome: normal, test outcome: killed
+[job-id] eafc44b93387426398a5ccecb51830f2
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_RShift 8
+worker outcome: normal, test outcome: killed
+[job-id] f093388a7fc943faa3fc0dbc3aa504d0
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Sub 3
+worker outcome: normal, test outcome: killed
+[job-id] 8d59748c46204fc597eee5f9870d2cbf
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Add_Sub 8
+worker outcome: normal, test outcome: killed
+[job-id] aec4fd551bba48e99f2c6b9597654123
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Mul_BitXor 0
+worker outcome: normal, test outcome: killed
+[job-id] c897a03242314d70893a24c5cc9c0435
+src\tw_mahjong\policies.py core/ReplaceBinaryOperator_Mul_LShift 0
+worker outcome: normal, test outcome: killed
+[job-id] f271f2e57ede4f8e85f099c170df0f62
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_GtE_Eq 0
+worker outcome: normal, test outcome: survived
+[job-id] 6aa8d8f9209c4f6e956624069b99843f
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_GtE_Eq 1
+worker outcome: normal, test outcome: survived
+[job-id] 3f14d596e6f04334a3a1fb3d2a945970
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Gt_GtE 0
+worker outcome: normal, test outcome: survived
+[job-id] 0f0fb2d1bb1445de972f32116ddf8371
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Is_Eq 4
+worker outcome: normal, test outcome: survived
+[job-id] f4668c2b7a964815a1e563cdc5d91fc9
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Is_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] 33f7637313194a92a0306228cbe1985f
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Is_Gt 3
+worker outcome: normal, test outcome: killed
+[job-id] edcde67dba16485eb188e3d8bfc0ce2a
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Is_LtE 4
+worker outcome: normal, test outcome: killed
+[job-id] b2992c592236492dae187587c6ef218c
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Is_NotEq 2
+worker outcome: normal, test outcome: survived
+[job-id] cda2d15fdf944d67b80abad30135fa38
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Lt_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] 02fc0ca732034c3c992f134c05c9eb12
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_Lt_NotEq 1
+worker outcome: normal, test outcome: killed
+[job-id] e883afc61bf34883a1b0f915b4c8a795
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_NotEq_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] 89d4d54cfcaf4ed58b1a23ed1a1b13e9
+src\tw_mahjong\policies.py core/ReplaceComparisonOperator_NotEq_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] c83812db503249198d96ff05ea7dbf84
+src\tw_mahjong\policies.py core/ZeroIterationForLoop 0
+worker outcome: normal, test outcome: killed
+[job-id] 3aa8f115ca514d0c99d9bfae790c0c50
+src\tw_mahjong\records.py core/AddNot 1
+worker outcome: normal, test outcome: killed
+[job-id] 51367df9332f4e3b8391f16ff05dd3ad
+src\tw_mahjong\records.py core/AddNot 11
+worker outcome: normal, test outcome: killed
+[job-id] a6e31a51d8d24bd1a88cd46b420b1d29
+src\tw_mahjong\records.py core/AddNot 13
+worker outcome: normal, test outcome: killed
+[job-id] 512e15cff176456892dc51ee07fb0f18
+src\tw_mahjong\records.py core/AddNot 15
+worker outcome: normal, test outcome: killed
+[job-id] f23c993801774df28b4d953ff59a09c7
+src\tw_mahjong\records.py core/AddNot 17
+worker outcome: normal, test outcome: killed
+[job-id] 1ca56506117945ea8b33b960d580214c
+src\tw_mahjong\records.py core/AddNot 19
+worker outcome: normal, test outcome: killed
+[job-id] 71433bc32e7c4f408d7a996b924e127c
+src\tw_mahjong\records.py core/AddNot 21
+worker outcome: normal, test outcome: killed
+[job-id] 72076d5586874d2db30205a09ba7b252
+src\tw_mahjong\records.py core/AddNot 22
+worker outcome: normal, test outcome: killed
+[job-id] be0894f04b4c4ea5b95a7d4f3b27a4ce
+src\tw_mahjong\records.py core/AddNot 24
+worker outcome: normal, test outcome: killed
+[job-id] a79b4742df794cafbce23bad3123a7ad
+src\tw_mahjong\records.py core/AddNot 4
+worker outcome: normal, test outcome: killed
+[job-id] 65db84f29f4243c5ac554e2240afe76a
+src\tw_mahjong\records.py core/AddNot 5
+worker outcome: normal, test outcome: killed
+[job-id] fc68da5770374806bd70fcbff924842f
+src\tw_mahjong\records.py core/AddNot 7
+worker outcome: normal, test outcome: killed
+[job-id] d4eae0722ca54c70a929614d31cc909e
+src\tw_mahjong\records.py core/ExceptionReplacer 0
+worker outcome: normal, test outcome: killed
+[job-id] 191e98b45fa649b79e8dc1f3ab258bef
+src\tw_mahjong\records.py core/ExceptionReplacer 1
+worker outcome: normal, test outcome: killed
+[job-id] e92e89462ab84535beca47d674cd792d
+src\tw_mahjong\records.py core/NumberReplacer 11
+worker outcome: normal, test outcome: killed
+[job-id] 99015ff1d8ac475fb240224b254e8f10
+src\tw_mahjong\records.py core/NumberReplacer 12
+worker outcome: normal, test outcome: killed
+[job-id] 0844dca1579a4d329d56cb1957473fd3
+src\tw_mahjong\records.py core/NumberReplacer 15
+worker outcome: normal, test outcome: killed
+[job-id] c1fe0d69831647f38b3e058a9901a29d
+src\tw_mahjong\records.py core/NumberReplacer 17
+worker outcome: normal, test outcome: killed
+[job-id] 8f2bbac7e962497b8eb1ebc30ca3d2b6
+src\tw_mahjong\records.py core/NumberReplacer 21
+worker outcome: normal, test outcome: killed
+[job-id] 2a03bc3d46af441982a3f633e37b6f47
+src\tw_mahjong\records.py core/NumberReplacer 22
+worker outcome: normal, test outcome: killed
+[job-id] 483865973b6a435d885ff341c991e71d
+src\tw_mahjong\records.py core/NumberReplacer 8
+worker outcome: normal, test outcome: survived
+[job-id] 82b24f03c1904707bab5e7487c80162e
+src\tw_mahjong\records.py core/NumberReplacer 9
+worker outcome: normal, test outcome: survived
+[job-id] 2302f7dcb0f2489991879c7cad099ea9
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] 46deff5ae8a34f6e8338c1119a3e78d9
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_Gt 5
+worker outcome: normal, test outcome: killed
+[job-id] 0d48c08820824003a58f9f433f69131d
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_Gt 7
+worker outcome: normal, test outcome: killed
+[job-id] 409ed673d4d64986a538e6b2744c8368
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_GtE 0
+worker outcome: normal, test outcome: survived
+[job-id] 515f5c8b72044847a1889d13e96eb93e
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_GtE 3
+worker outcome: normal, test outcome: survived
+[job-id] da101741e0cd43a9a7011d9f0c2f6ada
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_Lt 2
+worker outcome: normal, test outcome: killed
+[job-id] 1367ccaea3184e00add9dbf212371598
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_Lt 4
+worker outcome: normal, test outcome: killed
+[job-id] 96251e058d3740639059598f34eae036
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_LtE 1
+worker outcome: normal, test outcome: survived
+[job-id] 918ddee15cb04b638e7d285597cd116c
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_LtE 3
+worker outcome: normal, test outcome: killed
+[job-id] c2e23c1a53894efbbd4811f397d29b0f
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Eq_LtE 7
+worker outcome: normal, test outcome: killed
+[job-id] 4662640e50094ae8940bb2a08731de26
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_IsNot_Gt 1
+worker outcome: normal, test outcome: killed
+[job-id] c6999d99cc0949ff94a562048e9c5790
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_IsNot_GtE 2
+worker outcome: normal, test outcome: killed
+[job-id] 9d882c1ddcbe4a5eb5f6ca3dfe173e52
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_IsNot_Is 0
+worker outcome: normal, test outcome: killed
+[job-id] 0f5d9c8668e748b784dc29f9e38d1c9d
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_IsNot_LtE 0
+worker outcome: normal, test outcome: killed
+[job-id] a76eadd18c1a49de9adde1e0ef3c7d69
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_IsNot_NotEq 1
+worker outcome: normal, test outcome: survived
+[job-id] 3237a026002544fd82d6e5f6309cc27b
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_IsNot_NotEq 2
+worker outcome: normal, test outcome: survived
+[job-id] ca59c205fd404f1dbc3b043fec727024
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Is_IsNot 0
+worker outcome: normal, test outcome: killed
+[job-id] e37094c2a5d44140a2e5cd0b828127a3
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Is_IsNot 1
+worker outcome: normal, test outcome: killed
+[job-id] a550654985f74e8c823f96ff21643fe2
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_Is_IsNot 6
+worker outcome: normal, test outcome: killed
+[job-id] 91a62adab68944e38addf3fdf3aba975
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_NotEq_Eq 4
+worker outcome: normal, test outcome: killed
+[job-id] 858e1b2a6c01489b87f48a85155874e2
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_NotEq_GtE 2
+worker outcome: normal, test outcome: killed
+[job-id] e0c3a1fbb6244c0683dd29eadf5acbdd
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_NotEq_Is 3
+worker outcome: normal, test outcome: killed
+[job-id] 3d2f229936dd487fa856a8c9ed937611
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_NotEq_LtE 0
+worker outcome: normal, test outcome: killed
+[job-id] a77450d62a9e4bbbb5d2662eaf5c7f52
+src\tw_mahjong\records.py core/ReplaceComparisonOperator_NotEq_LtE 3
+worker outcome: normal, test outcome: killed
+[job-id] e647257c2dff4c39a249ad26cc13818d
+src\tw_mahjong\records.py core/ReplaceFalseWithTrue 0
+worker outcome: normal, test outcome: survived
+[job-id] ae856a86ca7649b08539a3a68ba0f30f
+src\tw_mahjong\records.py core/ReplaceOrWithAnd 2
+worker outcome: normal, test outcome: killed
+[job-id] a68c8919a7864302ae6964cc9a4765d6
+src\tw_mahjong\records.py core/ReplaceUnaryOperator_Delete_Not 4
+worker outcome: normal, test outcome: killed
+[job-id] fbc52930559d420da7100887e3aeb645
+src\tw_mahjong\records.py core/ZeroIterationForLoop 0
+worker outcome: normal, test outcome: killed
+[job-id] 2bd811a826d54d6aa0c4f0ad76206366
+src\tw_mahjong\scoring.py core/AddNot 13
+worker outcome: normal, test outcome: killed
+[job-id] 59b12fee32ce42eaa7d7bc1504efae40
+src\tw_mahjong\scoring.py core/AddNot 4
+worker outcome: normal, test outcome: killed
+[job-id] d3e96c9a302d45099635014b750539f1
+src\tw_mahjong\scoring.py core/NumberReplacer 0
+worker outcome: normal, test outcome: killed
+[job-id] f09391b0c5604c6cbf0e5d99c77303f7
+src\tw_mahjong\scoring.py core/NumberReplacer 111
+worker outcome: normal, test outcome: killed
+[job-id] 1230bc48f0ff46209df85fb175ce66b8
+src\tw_mahjong\scoring.py core/NumberReplacer 122
+worker outcome: normal, test outcome: killed
+[job-id] 078e89c47e7d4ab99f1f8cdc1b4da7ab
+src\tw_mahjong\scoring.py core/NumberReplacer 125
+worker outcome: normal, test outcome: killed
+[job-id] 0c72337aa73a4954a744b1ad328cfa49
+src\tw_mahjong\scoring.py core/NumberReplacer 20
+worker outcome: normal, test outcome: killed
+[job-id] 052597637ccb4575990f2485600692bc
+src\tw_mahjong\scoring.py core/NumberReplacer 43
+worker outcome: normal, test outcome: survived
+[job-id] 3dea1e3f75054f948a3c0dd03957a588
+src\tw_mahjong\scoring.py core/NumberReplacer 51
+worker outcome: normal, test outcome: killed
+[job-id] 2564c105a69d444fabb05c066125d98f
+src\tw_mahjong\scoring.py core/NumberReplacer 68
+worker outcome: normal, test outcome: killed
+[job-id] 1e10af601b3540a4b76123e62ea08646
+src\tw_mahjong\scoring.py core/NumberReplacer 81
+worker outcome: normal, test outcome: survived
+[job-id] fd0eafa1aba940b09d3a9d7fc8f9583c
+src\tw_mahjong\scoring.py core/ReplaceAndWithOr 2
+worker outcome: normal, test outcome: killed
+[job-id] 9d8f58735ce2445b82aab37717782cd4
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_BitAnd 1
+worker outcome: normal, test outcome: killed
+[job-id] 10691fb5cc694200bb63b07ec6a7875d
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_BitOr 7
+worker outcome: normal, test outcome: survived
+[job-id] c2652e1cb35b4650bbac90558087ffb6
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_Div 1
+worker outcome: normal, test outcome: killed
+[job-id] 4d4fc3d3eb324e8e851e61e56dddd711
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_FloorDiv 5
+worker outcome: normal, test outcome: killed
+[job-id] 95d8547ece314c579bbf3968002320bf
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_Mod 9
+worker outcome: normal, test outcome: killed
+[job-id] 3769b364374a45a182551d5698bbebe4
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_Pow 4
+worker outcome: normal, test outcome: killed
+[job-id] 5c2ac55edbf74fd6bbcaaaa9c27be1a1
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_Pow 5
+worker outcome: normal, test outcome: killed
+[job-id] 95a37df93be148a293a2e333a34c7916
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Add_RShift 2
+worker outcome: normal, test outcome: killed
+[job-id] 5205de1d11784310aa2b0900dbfdae64
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_FloorDiv_Add 0
+worker outcome: normal, test outcome: killed
+[job-id] 95baa8ff26544ef7a034f52f5e844b1c
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Mod_Mul 0
+worker outcome: normal, test outcome: killed
+[job-id] 6119724e07324b6faaa0d1be82dfad2b
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Mul_Add 0
+worker outcome: normal, test outcome: killed
+[job-id] 1b2f4c5560bc40c39216eb0a1d07daf0
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Sub_BitAnd 2
+worker outcome: normal, test outcome: killed
+[job-id] 2cfe3fa1d2514ec1a25d0f505081546c
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Sub_Div 1
+worker outcome: normal, test outcome: killed
+[job-id] c889e16a21e4444480923324c8998a0e
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Sub_Mod 0
+worker outcome: normal, test outcome: killed
+[job-id] f506aea0edf9453db7c26f33bef43391
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Sub_Mod 1
+worker outcome: normal, test outcome: killed
+[job-id] aa3e499a12a74488a221d7737fd7c6a2
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Sub_Mul 1
+worker outcome: normal, test outcome: killed
+[job-id] 06255542fb09411abe869bf39c21876a
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Sub_Pow 0
+worker outcome: normal, test outcome: killed
+[job-id] 91210513d7d54b36bb60bacc6f127fc6
+src\tw_mahjong\scoring.py core/ReplaceBinaryOperator_Sub_RShift 2
+worker outcome: normal, test outcome: survived
+[job-id] 6d22ec17e6bf4baeb930fdd316037a3b
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Eq_Gt 8
+worker outcome: normal, test outcome: killed
+[job-id] 0a427bacd48747d4b3f43896dca917d4
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Eq_GtE 11
+worker outcome: normal, test outcome: killed
+[job-id] b8569bc2ba644caf88300ce590cafcf6
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Eq_IsNot 1
+worker outcome: normal, test outcome: killed
+[job-id] beeadfd7567b4042a727b6fa77609f95
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Eq_LtE 10
+worker outcome: normal, test outcome: survived
+[job-id] b38fccdc453143ac9ae14b20b385cb43
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Eq_LtE 6
+worker outcome: normal, test outcome: killed
+[job-id] 1310436dc4d841b3a869cd23703d11be
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Eq_NotEq 11
+worker outcome: normal, test outcome: killed
+[job-id] 59335f72c3054b59b4641c54c40de617
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Eq_NotEq 2
+worker outcome: normal, test outcome: killed
+[job-id] c3e591e988064c9a8a4505a0e59654b2
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_GtE_Eq 0
+worker outcome: normal, test outcome: survived
+[job-id] 476c8a766d2d4a84a8fd49850de01127
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_GtE_LtE 0
+worker outcome: normal, test outcome: killed
+[job-id] 38b48905163142ca8eb32c62b68f294d
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_IsNot_Is 1
+worker outcome: normal, test outcome: survived
+[job-id] 0143b2e297d649b38e011e99fa5fad14
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Is_Gt 3
+worker outcome: normal, test outcome: killed
+[job-id] 516be2f6a9494f88956f373af7d7216c
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Is_GtE 2
+worker outcome: normal, test outcome: killed
+[job-id] 3faef22c5bb64fd5b7ae515c4ae52b36
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Is_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] bd2b7ef7e3ba4b979eca93434d88cc26
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_Is_Lt 4
+worker outcome: normal, test outcome: killed
+[job-id] fa62f2f3b8b7400c8f5a58565216a5e3
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_LtE_IsNot 1
+worker outcome: normal, test outcome: killed
+[job-id] 8508a7e963b14762864f6ef3941050c5
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_LtE_NotEq 0
+worker outcome: normal, test outcome: killed
+[job-id] 64b452031a2e44d19a567a7038fe3968
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_LtE_NotEq 1
+worker outcome: normal, test outcome: killed
+[job-id] 8e95ae0884294e68a1674824e7d8174a
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_NotEq_Gt 1
+worker outcome: normal, test outcome: killed
+[job-id] fa7066193cbf42ea98118e0d7cc3531d
+src\tw_mahjong\scoring.py core/ReplaceComparisonOperator_NotEq_IsNot 0
+worker outcome: normal, test outcome: killed
+[job-id] 052fe6a49a3c4261b3d2c2e54abf09b7
+src\tw_mahjong\scoring.py core/ReplaceUnaryOperator_USub_Not 2
+worker outcome: normal, test outcome: survived
+[job-id] 75d2d18dfce0413bad9dcddf0c40aa92
+src\tw_mahjong\simulation.py core/AddNot 10
+worker outcome: normal, test outcome: killed
+[job-id] c6d3ceaa71a442b496ad7211241f97b6
+src\tw_mahjong\simulation.py core/AddNot 11
+worker outcome: normal, test outcome: killed
+[job-id] 7a21b74025914058bef933be4aa2eafc
+src\tw_mahjong\simulation.py core/AddNot 3
+worker outcome: normal, test outcome: killed
+[job-id] 2544984dfe754f98b877dd1c83debd80
+src\tw_mahjong\simulation.py core/AddNot 4
+worker outcome: normal, test outcome: killed
+[job-id] 3006bfaa600d4ffd9b6f9a3b2bf1cbf0
+src\tw_mahjong\simulation.py core/AddNot 5
+worker outcome: normal, test outcome: killed
+[job-id] 18ccb7afc8244503b7968eb907257240
+src\tw_mahjong\simulation.py core/AddNot 8
+worker outcome: normal, test outcome: killed
+[job-id] 0dd2cc3bba904766a30aaea542706e88
+src\tw_mahjong\simulation.py core/NumberReplacer 1
+worker outcome: normal, test outcome: killed
+[job-id] b6213f0db7d6465baae7b3b4023c1919
+src\tw_mahjong\simulation.py core/NumberReplacer 10
+worker outcome: normal, test outcome: killed
+[job-id] ebd31729f16e474a9af2d0fc0665a77a
+src\tw_mahjong\simulation.py core/NumberReplacer 11
+worker outcome: normal, test outcome: killed
+[job-id] 5ac53efb148d467ba9750745d4f662fb
+src\tw_mahjong\simulation.py core/NumberReplacer 4
+worker outcome: normal, test outcome: killed
+[job-id] 7b1de2087b664328add2832f19fcc253
+src\tw_mahjong\simulation.py core/NumberReplacer 5
+worker outcome: normal, test outcome: killed
+[job-id] 574396fc5e9546e08b47331873a2dc3e
+src\tw_mahjong\simulation.py core/NumberReplacer 6
+worker outcome: normal, test outcome: survived
+[job-id] 367f88e1685b401c9845ba187d082971
+src\tw_mahjong\simulation.py core/NumberReplacer 8
+worker outcome: normal, test outcome: killed
+[job-id] 8888ea16d0d34fe8acfc106fbda6c992
+src\tw_mahjong\simulation.py core/ReplaceBinaryOperator_Mul_Add 0
+worker outcome: normal, test outcome: killed
+[job-id] 74512cf5582941a9a09dfbe925d882ba
+src\tw_mahjong\simulation.py core/ReplaceBinaryOperator_Mul_BitOr 0
+worker outcome: normal, test outcome: killed
+[job-id] ad89df86d8cc4ebf85df203966b8a159
+src\tw_mahjong\simulation.py core/ReplaceBinaryOperator_Mul_Div 0
+worker outcome: normal, test outcome: survived
+[job-id] 3a79d29a65cd44938ac65a6522b4cbf3
+src\tw_mahjong\simulation.py core/ReplaceBinaryOperator_Mul_FloorDiv 0
+worker outcome: normal, test outcome: killed
+[job-id] 51f2df4968bd4329bd0197afdfd32896
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Eq_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] 113f3bee7b5b49dea9138b8132e7d0b1
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Eq_GtE 0
+worker outcome: normal, test outcome: survived
+[job-id] 9bcc0ff4905c401daa241ce4da06c34a
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Eq_GtE 1
+worker outcome: normal, test outcome: killed
+[job-id] e0393e09be494bc5a8a67434ac45dc3d
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Eq_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] 82053c9377584a8f9afa470428246714
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Eq_Lt 1
+worker outcome: normal, test outcome: killed
+[job-id] 37cee56ced384012939c4812a61ba729
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Eq_NotEq 0
+worker outcome: normal, test outcome: killed
+[job-id] 6f56929c3a4440e2a757fee0087c41e4
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Eq_NotEq 1
+worker outcome: normal, test outcome: killed
+[job-id] 9780080463a04d038866689bf669adcb
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_IsNot_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] 02db25848ded4cb9b641603437068730
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_IsNot_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] 4b5fae523eda49f2a9db69baf166fea1
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_IsNot_LtE 0
+worker outcome: normal, test outcome: killed
+[job-id] c536b0dd9a334c71a718575f295456b3
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Is_Eq 0
+worker outcome: normal, test outcome: survived
+[job-id] 7cb13fce73e6481a85d402296601d09e
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Is_Eq 2
+worker outcome: normal, test outcome: survived
+[job-id] 2e2b11059c1f4f76be17969ace2a9c15
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Is_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] b43087447b9247ea80a176709dea9463
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Is_IsNot 1
+worker outcome: normal, test outcome: killed
+[job-id] 3028dd39acaa4c8892724b60902cffd8
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Is_Lt 0
+worker outcome: normal, test outcome: killed
+[job-id] a79ff099ee274b53bc100211dfc68a34
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Is_LtE 2
+worker outcome: normal, test outcome: killed
+[job-id] 7c14e7d32f5843f89455ada2895689a4
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_Is_NotEq 1
+worker outcome: normal, test outcome: killed
+[job-id] 8404967fcdfb4aaebe199d0609bd9728
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_Eq 0
+worker outcome: normal, test outcome: killed
+[job-id] 007bb2ebf4a542ff8ab172cc8376ee3d
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_GtE 0
+worker outcome: normal, test outcome: killed
+[job-id] 62a5c9d0031a463bbc33b86efea0af78
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_GtE 2
+worker outcome: normal, test outcome: killed
+[job-id] c98de63c51d045f5a1b0f6a14a2d6cfc
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_Is 0
+worker outcome: normal, test outcome: killed
+[job-id] 6b0f441aabcb4a5993ed672456e75224
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_IsNot 0
+worker outcome: normal, test outcome: killed
+[job-id] 9303a2eb8aa34c5194e8d7b2c508376d
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_Lt 1
+worker outcome: normal, test outcome: survived
+[job-id] c56b0e4fb57c4e669750e8c64e318c5f
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_LtE 0
+worker outcome: normal, test outcome: killed
+[job-id] dccb94e0fba64d1faf2f9041cf2f9888
+src\tw_mahjong\simulation.py core/ReplaceComparisonOperator_NotEq_LtE 1
+worker outcome: normal, test outcome: killed
+[job-id] 8b24736c814046ee95d63de808fefcde
+src\tw_mahjong\simulation.py core/ReplaceOrWithAnd 0
+worker outcome: normal, test outcome: killed
+[job-id] bc262c992aa54cef899b81770d66bad9
+src\tw_mahjong\simulation.py core/ReplaceOrWithAnd 1
+worker outcome: normal, test outcome: killed
+[job-id] 8facf5389e194b5e84fd40a73c8ffb15
+src\tw_mahjong\simulation.py core/ReplaceOrWithAnd 2
+worker outcome: normal, test outcome: killed
+[job-id] 43e59b68b0954207901e3946b6318575
+src\tw_mahjong\simulation.py core/ReplaceUnaryOperator_Delete_Not 0
+worker outcome: normal, test outcome: killed
+[job-id] 7651c800846f470e921895d884a1f087
+src\tw_mahjong\simulation.py core/ReplaceUnaryOperator_Delete_Not 1
+worker outcome: normal, test outcome: killed
+[job-id] 5cf359036c5746c2bbcbf164e4fad035
+src\tw_mahjong\simulation.py core/ReplaceUnaryOperator_Delete_Not 2
+worker outcome: normal, test outcome: killed
+[job-id] 756da87f6835418db5bec2b5ef79e079
+src\tw_mahjong\simulation.py core/ZeroIterationForLoop 0
+worker outcome: normal, test outcome: killed
+[job-id] 5560b0bbc0554c6faa2e70f3c64064eb
+src\tw_mahjong\simulation.py core/ZeroIterationForLoop 2
+worker outcome: normal, test outcome: killed
+[job-id] 680d6782506a48feb1ebaf978d16b54c
+src\tw_mahjong\wall.py core/AddNot 0
+worker outcome: normal, test outcome: killed
+[job-id] 657ef57f4a024624b243d87181488c85
+src\tw_mahjong\wall.py core/AddNot 1
+worker outcome: normal, test outcome: killed
+[job-id] 3c1982915c8b4897bc89f80b6c079a59
+src\tw_mahjong\wall.py core/AddNot 2
+worker outcome: normal, test outcome: killed
+[job-id] f93d6356fe2d4ea3a6ed6b5be7e9deec
+src\tw_mahjong\wall.py core/AddNot 3
+worker outcome: normal, test outcome: killed
+[job-id] 4946cb6252f04b1fae32fe291430364b
+src\tw_mahjong\wall.py core/NumberReplacer 0
+worker outcome: normal, test outcome: killed
+[job-id] cc7b904066e14eda8a5bce79cb798998
+src\tw_mahjong\wall.py core/NumberReplacer 1
+worker outcome: normal, test outcome: killed
+[job-id] bb63d2df50274e07b31fe8e741dd1f28
+src\tw_mahjong\wall.py core/NumberReplacer 2
+worker outcome: normal, test outcome: killed
+[job-id] 1d1ed3e31c804ff88bbc2ad1c13e97d3
+src\tw_mahjong\wall.py core/NumberReplacer 3
+worker outcome: normal, test outcome: killed
+[job-id] cb311e48589a433294987b963bd7fc1a
+src\tw_mahjong\wall.py core/NumberReplacer 4
+worker outcome: normal, test outcome: killed
+[job-id] fb87b346e54e46d1a8438399ac372770
+src\tw_mahjong\wall.py core/NumberReplacer 5
+worker outcome: normal, test outcome: killed
+[job-id] db279bb9bd714ca0802931ecec8ecdec
+src\tw_mahjong\wall.py core/NumberReplacer 6
+worker outcome: normal, test outcome: killed
+[job-id] 2d0f1fb867334c7f952a9384ee08d63a
+src\tw_mahjong\wall.py core/NumberReplacer 7
+worker outcome: normal, test outcome: killed
+[job-id] e9ebaef3578c4ff988ede0293f0afa0f
+src\tw_mahjong\wall.py core/RemoveDecorator 0
+worker outcome: normal, test outcome: killed
+[job-id] 396c4224032a40cea4c5c80883ca68f3
+src\tw_mahjong\wall.py core/ReplaceComparisonOperator_NotEq_Eq 0
+worker outcome: normal, test outcome: killed
+[job-id] 6cc32a89f307461b93414a900f105cf4
+src\tw_mahjong\wall.py core/ReplaceComparisonOperator_NotEq_Gt 0
+worker outcome: normal, test outcome: killed
+[job-id] 3205ab6fbe8447829b4a6a1fa90f8770
+src\tw_mahjong\wall.py core/ReplaceComparisonOperator_NotEq_GtE 0
+worker outcome: normal, test outcome: killed
+[job-id] 40fb8686575f480381118854084ec8f3
+src\tw_mahjong\wall.py core/ReplaceComparisonOperator_NotEq_Is 0
+worker outcome: normal, test outcome: killed
+[job-id] d87e6aac1ea64326893bbdd7d27bd4b7
+src\tw_mahjong\wall.py core/ReplaceComparisonOperator_NotEq_IsNot 0
+worker outcome: normal, test outcome: survived
+[job-id] 3712386fba8847dcb631cf9f66d24e46
+src\tw_mahjong\wall.py core/ReplaceComparisonOperator_NotEq_Lt 0
+worker outcome: normal, test outcome: survived
+[job-id] 3e38b0de42e04d9abc55d65e31940695
+src\tw_mahjong\wall.py core/ReplaceComparisonOperator_NotEq_LtE 0
+worker outcome: normal, test outcome: killed
+[job-id] cdcf41a98d8449538384c65b2bd39c35
+src\tw_mahjong\wall.py core/ReplaceOrWithAnd 0
+worker outcome: normal, test outcome: killed
+[job-id] d51ec76c50324042b8a69bd8f3570015
+src\tw_mahjong\wall.py core/ReplaceTrueWithFalse 0
+worker outcome: normal, test outcome: killed
+[job-id] 25870b5bad7944369f12808168de1810
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_Delete_Not 0
+worker outcome: normal, test outcome: killed
+[job-id] b3d89473e4204906a4eddc3688000d83
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_Delete_Not 1
+worker outcome: normal, test outcome: killed
+[job-id] e7ffda7f37bf44229a665fa59136e2b0
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_Delete_Not 2
+worker outcome: normal, test outcome: killed
+[job-id] 3183db332a8a402a98b27dde30345d8f
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_Delete_Not 3
+worker outcome: normal, test outcome: killed
+[job-id] fedafc6621ea4a5692813eb489e6fa55
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_Delete_USub 0
+worker outcome: normal, test outcome: killed
+[job-id] ce39bc1ea92e404886fd0e48ad73290d
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_Delete_USub 1
+worker outcome: normal, test outcome: killed
+[job-id] 2f6c99b0b08b4ce2811a6f5f42d0c519
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_USub_Invert 0
+worker outcome: normal, test outcome: killed
+[job-id] 52cb9bbd12fe42dbb1335749553d51af
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_USub_Invert 1
+worker outcome: normal, test outcome: killed
+[job-id] 6878973caf444290b5d6f8da52afe586
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_USub_Not 0
+worker outcome: normal, test outcome: killed
+[job-id] e90896bbbdb547cfae91343e3d8e3ff5
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_USub_Not 1
+worker outcome: normal, test outcome: killed
+[job-id] a41630c246d849b88d9e2bfc2d60afef
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_USub_UAdd 0
+worker outcome: normal, test outcome: killed
+[job-id] b7e981916c1a46d699d900eb6f8d2b42
+src\tw_mahjong\wall.py core/ReplaceUnaryOperator_USub_UAdd 1
+worker outcome: normal, test outcome: killed
+total jobs: 484
+complete: 484 (100.00%)
+surviving mutants: 76 (15.70%)
